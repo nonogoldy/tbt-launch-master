@@ -1,0 +1,840 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Body Tell · 4-Week Launch Command Center</title>
+<style>
+:root{
+ --bone:#F4EEE1;--bone2:#FBF8F1;--linen:#EADFCC;--ink:#211C15;--ink2:#51463A;--mute:#877A69;
+ --forest:#1F3A2C;--gold:#C48820;--gold-ink:#8A5E12;--terra:#B7593E;--line:#E2D7C3;
+ --serif:'Cormorant Garamond',Georgia,'Palatino Linotype',Palatino,serif;
+ --sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+ --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;}
+@media (prefers-color-scheme:dark){:root{
+ --bone:#14100A;--bone2:#1C1710;--linen:#241C12;--ink:#EFE8DA;--ink2:#BDB09C;--mute:#8A7D6B;
+ --forest:#2C5340;--gold:#D99E3A;--gold-ink:#D99E3A;--terra:#D27A64;--line:#30271A;}}
+:root[data-theme="light"]{--bone:#F4EEE1;--bone2:#FBF8F1;--ink:#211C15;--ink2:#51463A;--line:#E2D7C3;--gold-ink:#8A5E12;}
+:root[data-theme="dark"]{--bone:#14100A;--bone2:#1C1710;--ink:#EFE8DA;--ink2:#BDB09C;--line:#30271A;--gold-ink:#D99E3A;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+.top{background:var(--forest);color:#F3EEDF;padding:16px 22px}
+.top .shell{max-width:1120px;margin:0 auto}
+.brand{font-family:var(--mono);letter-spacing:.16em;font-size:12px;font-weight:600}
+.brand b{color:#E7C87E}
+.top h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,4vw,40px);margin:8px 0 2px;letter-spacing:-.01em}
+.top .sub{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:#CBBE96}
+.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bone) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .shell{max-width:1120px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;padding:0 10px}
+.tab{border:0;background:transparent;padding:15px 15px;white-space:nowrap;font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;font-weight:600;color:var(--ink2);cursor:pointer;border-bottom:3px solid transparent}
+.tab.active{color:var(--ink);border-bottom-color:var(--gold)}
+main{max-width:1120px;margin:0 auto;padding:30px 22px 90px}
+.tabpane{display:none}.tabpane.active{display:block}
+.wk-h{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.4vw,34px);margin:0 0 14px;letter-spacing:-.01em}
+.lede{font-family:var(--serif);font-style:italic;font-size:1.3rem;line-height:1.4;color:var(--ink2);max-width:62ch;margin:0 0 26px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+.panel{background:var(--bone2);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:0 0 16px}
+.panel.accent{border-left:3px solid var(--terra)}
+.panel h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin:0 0 10px}
+.ladder{margin:0;padding-left:18px}.ladder li{margin:7px 0;color:var(--ink2)}.ladder b{color:var(--ink)}
+.ticks{list-style:none;margin:0;padding:0}
+.ticks li{position:relative;padding-left:20px;margin:9px 0;color:var(--ink2)}
+.ticks li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.ticks b{color:var(--ink)}
+.qa{color:var(--ink2);font-size:.95rem}
+/* grid */
+.gridwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 26px}
+table.grid{border-collapse:collapse;width:100%;min-width:720px;background:var(--bone2)}
+.grid th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink);text-align:left;padding:12px 14px;border-bottom:2px solid var(--line)}
+.grid td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem}
+.grid tr:last-child td{border-bottom:0}
+.g-day{font-weight:600;white-space:nowrap}.g-title{font-family:var(--serif);font-size:1.05rem}.g-obj{color:var(--ink2);max-width:40ch}
+/* chips */
+.chip{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:4px 9px;border-radius:30px;border:1px solid var(--line);white-space:nowrap}
+.chip.fmt{background:color-mix(in srgb,var(--gold) 14%,transparent);color:var(--gold-ink);border-color:transparent}
+.chip.fmt.ghost{background:transparent;color:var(--mute);border-color:var(--line)}
+.chip.cta.gold{background:color-mix(in srgb,var(--gold) 16%,transparent);color:var(--gold-ink);border-color:transparent}
+.chip.cta.forest{background:color-mix(in srgb,var(--forest) 14%,transparent);color:var(--forest);border-color:transparent}
+.chip.cta.terra{background:color-mix(in srgb,var(--terra) 15%,transparent);color:var(--terra);border-color:transparent}
+.chip.cta.mute{background:transparent;color:var(--mute);border:1px dashed var(--line)}
+/* day cards */
+.daycards{display:flex;flex-direction:column;gap:10px}
+details.day{background:var(--bone2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+details.day[open]{box-shadow:0 20px 50px -40px rgba(31,58,44,.5)}
+summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px 18px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--serif);font-size:1.5rem;color:var(--gold-ink);margin-left:auto}
+details[open] summary::after{content:"\2013"}
+.d-day{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--gold-ink);flex:none;width:92px}
+.d-title{font-family:var(--serif);font-size:1.2rem;font-weight:600;flex:1;min-width:0}
+.d-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:620px){summary{flex-wrap:wrap}.d-day{width:auto}.d-title{flex-basis:100%;order:3}.d-chips{order:2}}
+.d-body{padding:4px 18px 20px;border-top:1px solid var(--line)}
+.obj{background:color-mix(in srgb,var(--forest) 8%,transparent);border-radius:9px;padding:12px 14px;margin:14px 0}
+.obj-l,.fld-l,.sf-l,.frame-n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--gold-ink)}
+.obj-b{margin-top:4px;font-size:.95rem}
+.fld{margin:14px 0}
+.fld-b{margin-top:5px;color:var(--ink2)}
+.fld.script .fld-b{font-family:var(--serif);font-size:1.12rem;line-height:1.75;color:var(--ink)}
+.fld.film .fld-b{background:color-mix(in srgb,var(--terra) 8%,transparent);border-radius:8px;padding:10px 12px;font-size:.9rem}
+.sf{margin:8px 0;padding:10px 12px;background:var(--bone);border:1px solid var(--line);border-radius:8px}
+.sf-b{margin-top:4px;font-size:.92rem;color:var(--ink2)}
+.stories{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+.frame{margin:8px 0;padding-left:14px;border-left:2px solid var(--gold)}
+.frame-b{margin-top:2px;font-size:.9rem;color:var(--ink2)}
+.themebtn{position:fixed;right:14px;bottom:14px;z-index:30;border:1px solid var(--line);background:var(--bone2);color:var(--ink);font-family:var(--mono);font-size:11px;padding:8px 12px;border-radius:30px;cursor:pointer}
+@media print{.nav,.themebtn{display:none}.tabpane{display:block!important}details.day{break-inside:avoid}details.day>.d-body{display:block!important}summary::after{display:none}body{background:#fff}}
+</style></head><body>
+<header class="top"><div class="shell">
+  <div class="brand">THE BODY TELL <b>/ LAUNCH COMMAND CENTER</b></div>
+  <h1>4-Week Launch Command Center</h1>
+  <div class="sub">28 feed pieces · 28 Story sequences · 4 founder films · objectives · scripts · how to film · CTAs · orchestration</div>
+</div></header>
+<nav class="nav"><div class="shell"><button class="tab active" data-t="overview">Overview</button><button class="tab" data-t="w1">W1 · Recognition</button><button class="tab" data-t="w2">W2 · Fragmentation</button><button class="tab" data-t="w3">W3 · Pattern</button><button class="tab" data-t="w4">W4 · The Body Tell</button><button class="tab" data-t="filming">Filming &amp; Orchestration</button></div></nav>
+<main>
+
+    <section id="overview" class="tabpane active">
+      <h2 class="wk-h">The four-week story</h2>
+      <p class="lede">Something has changed. Maybe I should stop automatically explaining it away.<br>I’m one woman. Why does my health story feel like five different stories?<br>Maybe the useful information is not one symptom. Maybe it is what changed together.<br>This is the problem The Body Tell was built to help with.<br>Conversion pressure rises slowly: Week 1 conversation. Week 2 recognition + saves. Week 3 education + self-advocacy. Week 4 product + First Read.<br>Product boundary: The Body Tell is educational. Pattern recognition is not diagnosis. The First Read names a primary pattern; the deeper Pattern Report supports a more organised clinical conversation.</p>
+
+      <div class="cols">
+        <div class="panel">
+          <h3>Conversion ladder</h3>
+          <ol class="ladder">
+            <li><b>Week 1 · Recognition</b> — conversation. No product.</li>
+            <li><b>Week 2 · Fragmentation</b> — recognition + saves. Product named softly.</li>
+            <li><b>Week 3 · Pattern</b> — education + self-advocacy. Boundary held.</li>
+            <li><b>Week 4 · Reveal</b> — product + First Read. Conversion.</li>
+          </ol>
+        </div>
+        <div class="panel accent">
+          <h3>The one thing to decide before you post</h3>
+          <p><b>Where does the consented email get captured?</b> Reach is not the goal — a cohort is. Pick the mechanic and wire it before Week 1:</p>
+          <ul class="ticks">
+            <li>Link-in-bio → First Read (completion = email + Founding Circle consent)</li>
+            <li>Week-4 comment mechanic: "comment SYMPTOMS" → auto-DM the First Read link / Founding code</li>
+            <li>Story link stickers → First Read on every product day</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Global rules (every piece obeys these)</h3>
+        <ul class="ticks">
+          <li><b>Boundary:</b> educational only · pattern recognition is not diagnosis · First Read names a primary pattern free; the €35 Pattern Report supports a more organised clinical conversation.</li>
+          <li><b>Voice:</b> editorial, plain-spoken, clinically exact. Warmth = respect, not softness. No emoji, no hype, no diagnostic verbs.</li>
+          <li><b>No sale in Week 1.</b> Product education starts softly in Week 2. Conversion is Week 4.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="w1" class="tabpane">
+      <h2 class="wk-h">WEEK 01 · RECOGNITION</h2>
+      <div class="gridwrap"><table class="grid"><thead><tr><th>Day</th><th>Format</th><th>Piece</th><th>Objective</th><th>CTA</th></tr></thead><tbody><tr><td class="g-day">Monday</td><td><span class="chip fmt">Founder Film 01</span></td><td class="g-title">THE WOMAN UNDERNEATH THE FOUNDER</td><td class="g-obj">Reintroduce Noelly through the real 4.5.6 story. Set the emotional origin before any health or product talk.</td><td><span class="chip cta gold">Watch · Comment</span></td></tr><tr><td class="g-day">Tuesday</td><td><span class="chip fmt">Carousel</span></td><td class="g-title">THREE TESTS FOR “I’M PROBABLY JUST TIRED”</td><td class="g-obj">Turn the founder story toward the viewer with a save-worthy self-check. Start the &#x27;stop explaining it away&#x27; idea.</td><td><span class="chip cta gold">Save · Comment</span></td></tr><tr><td class="g-day">Wednesday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">FIVE SYMPTOMS. FIVE APPOINTMENTS.</td><td class="g-obj">Introduce fragmentation without attacking doctors. Pull comments (how many practitioners?).</td><td><span class="chip cta forest">Comment</span></td></tr><tr><td class="g-day">Thursday</td><td><span class="chip fmt">Utility Carousel</span></td><td class="g-title">BRING THE WHOLE PICTURE</td><td class="g-obj">Give a genuinely useful appointment-prep tool. Earn saves and authority.</td><td><span class="chip cta gold">Save</span></td></tr><tr><td class="g-day">Friday</td><td><span class="chip fmt">Founder Cutdown</span></td><td class="g-title">I REALLY THOUGHT WE’D MADE IT.</td><td class="g-obj">Re-hook the founder film mid-week and drive Part 1 watch-through.</td><td><span class="chip cta gold">Watch</span></td></tr><tr><td class="g-day">Saturday</td><td><span class="chip fmt">Static Editorial</span></td><td class="g-title">YOUR SYMPTOMS ARE NOT SEPARATE TABS</td><td class="g-obj">Crystallise the week&#x27;s thesis in one shareable editorial frame. Let it land.</td><td><span class="chip cta mute">None</span></td></tr><tr><td class="g-day">Sunday</td><td><span class="chip fmt">Community Reel</span></td><td class="g-title">“BUT WHAT IF THEY’RE NOT CONNECTED?”</td><td class="g-obj">Pre-empt the main objection and protect the pattern-is-not-one-cause boundary. Open next week.</td><td><span class="chip cta forest">Comment</span></td></tr></tbody></table></div>
+      <div class="daycards">
+      <details class="day">
+        <summary>
+          <span class="d-day">Monday</span>
+          <span class="d-title">THE WOMAN UNDERNEATH THE FOUNDER</span>
+          <span class="d-chips"><span class="chip fmt">Founder Film 01</span><span class="chip cta gold">Watch · Comment</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Reintroduce Noelly through the real 4.5.6 story. Set the emotional origin before any health or product talk.</div></div>
+          <div class="fld field"><span class="fld-l">Purpose (original)</span><div class="fld-b">Reintroduce Noelly through the real story. Establish the emotional origin before health or product.</div></div>
+<div class="fld field"><span class="fld-l">Cover / on-screen hook</span><div class="fld-b">WHAT DOES IT MEAN TO LOSE SOMETHING THAT DEFINED YOU?<br>The Body Tell · Part 1</div></div>
+<div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">What happens when your identity is tied to your success?<br><br>I always understood the risk of entrepreneurship.<br><br>[BEAT]<br><br>Or... I thought I did.<br><br>I knew it might not work out.<br><br>[BEAT]<br><br>What I didn’t expect was that the year I finally believed we were going to make it... would be the year everything stopped.<br><br>[BEAT]<br><br>Hi, I&#x27;m Noelly Michoux, and I co-founded an amazing brand called 4.5.6 Skin, where we pioneered the world&#x27;s first skin-tone research lab focusing on skin phototypes four, five and six.<br><br>Because here’s what the industry was actually doing, and it probably has not changed that much.<br><br>Most skincare was white-label. Somebody develops a formula, tests it, validates it, largely on European skin... and then sells it as suitable for all.<br><br>[BEAT]<br><br>One kind of skin had been the default for far too long.<br><br>So we started from the other end.<br><br>[ARCHIVE / B-ROLL]<br><br>By developing unique formulas specifically for skin phototypes four, five and six, addressing the long-overlooked needs of diverse skin tones.<br><br>We built it all from scratch.<br><br>The lab. The formulas. An amazing community.<br><br>We won so many awards.<br><br>And we were the small player pushing the industry to do better than just performative marketing.<br><br>And I was so proud of that.<br><br>Still am.<br><br>[TO CAMERA]<br><br>But this was a brutal experience.<br><br>I was so deep in it that I didn&#x27;t really feel it that way at the time.<br><br>We needed money to grow.<br><br>And we needed growth to raise money.<br><br>[SMALL SMILE]<br><br>Classic dog chasing its own tail.<br><br>And we weren’t the only ones.<br><br>We&#x27;ve watched brand after brand built for darker skin hit some version of that same wall.<br><br>[BEAT]<br><br>That isn’t bad luck.<br><br>That’s structural.<br><br>But 2024 felt different.<br><br>Sales were stronger. The team was finding its feet. Stronger community. Awards.<br><br>And I remember thinking...<br><br>Oh my God.<br><br>We might actually pull this off.<br><br>[BEAT · HOLD]<br><br>And then our lead investor decided not to support the next round of funding.<br><br>We had built the 2025 plan around it.<br><br>[BEAT]<br><br>And without it, we couldn’t hold the company together.<br><br>This was soul-shattering.<br><br>[BEAT]<br><br>I thought losing the company would be the worst part.<br><br>[BEAT]<br><br>It wasn’t.<br><br>Because somewhere along the way, I’d become the company.<br><br>And when it ended, I didn’t know how to... BE.<br><br>Who am I without the constant grinding?<br><br>Without the striving?<br><br>[BEAT]<br><br>Without something to prove?<br><br>[CLOSE]<br><br>Have you ever lost something that felt like part of who you are?<br><br>Tell me what it was.<br><br>I read the comments.<br><br>[BEAT]<br><br>Part Two is what happened when I finally stopped.</div></div>
+<div class="fld film"><span class="fld-l">How to film / on-screen</span><div class="fld-b">Use real 4.5.6 material only: lab, product development, community, press, awards, retail, team, founder footage. Do not turn the failure section into a sad montage. Return to face.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">I thought losing the company would be the hardest part.<br><br>It wasn’t.<br><br>For six years, I had poured so much of myself into 4.5.6 Skin that somewhere along the way, I stopped knowing where the company ended and I began.<br><br>This is Part 1.<br><br>Have you ever lost something that had become part of who you were?</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Comment: what was it? No TBT product CTA.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">SELFIE · SAY: I’m posting something today that I’ve been sitting on for a while. It starts with 4.5.6. But actually... it’s really about what happened to me when 4.5.6 ended.<br>ON SCREEN: PART 1 · TODAY</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">ARCHIVE · ON SCREEN: 6 years. A lab. Products we built from scratch. A community I loved. And a company that became a huge part of who I was.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">SELFIE · SAY: I thought losing the company would be the hardest part. It wasn&#x27;t.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">Share Founder Film.<br>STICKER: WATCH PART 1</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">QUESTION BOX: Have you ever lost something that had become part of your identity?</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Tuesday</span>
+          <span class="d-title">THREE TESTS FOR “I’M PROBABLY JUST TIRED”</span>
+          <span class="d-chips"><span class="chip fmt">Carousel</span><span class="chip fmt ghost">8 SLIDES</span><span class="chip cta gold">Save · Comment</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Turn the founder story toward the viewer with a save-worthy self-check. Start the &#x27;stop explaining it away&#x27; idea.</div></div>
+          <div class="fld field"><span class="fld-l">Purpose (original)</span><div class="fld-b">Turn Monday’s personal story toward the reader.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 01 · COVER</span><div class="sf-b">THREE TESTS FOR<br>“I’M PROBABLY JUST TIRED”<br><br>Before you explain it away again.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 02</span><div class="sf-b">I became very good at explaining my symptoms away.<br><br>Of course I’m exhausted — I’m running a company.<br>Of course I’m not sleeping — I’m stressed.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 03</span><div class="sf-b">And sometimes those explanations were true.<br><br>That’s exactly what made them work.<br><br>I stopped noticing how many things had changed.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 04 · TEST ONE</span><div class="sf-b">IS IT DIFFERENT FROM YOUR NORMAL?<br><br>Not “is it bad.” Is it different. You are the only person who knows your baseline — which is why nobody else can notice this for you.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 05 · TEST TWO</span><div class="sf-b">DOES IT KEEP HAPPENING?<br><br>A bad week is a bad week. Three months is information. Put a rough start date on it — “around February” is enough.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 06 · TEST THREE</span><div class="sf-b">DID SEVERAL THINGS CHANGE AROUND THE SAME TIME?<br><br>This is the one people leave out, because it feels like guessing.<br><br>You’re not diagnosing anything. You’re keeping the relationship between them.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 07 · WRITE DOWN THREE THINGS</span><div class="sf-b">What changed.<br>When it changed.<br>What tends to show up together.<br><br>That’s it. Not a symptom diary. Three lines in your notes app.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 08 · CLOSE</span><div class="sf-b">You don’t need to arrive with a theory about what’s wrong.<br><br>You need your story to be easy to follow.<br><br>Save this for the next time you hear yourself say “I’m probably just tired.”<br><br>Educational only · not a diagnosis</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">I became very good at explaining my symptoms away.<br><br>Of course I’m exhausted. I’m running a company. Of course I’m not sleeping. I’m stressed.<br><br>And sometimes those explanations were true. That’s what made them work so well.<br><br>The problem is that an explanation that fits stops you asking the next question. I didn’t notice how many separate things had changed until someone finally looked at them together.<br><br>You don’t need to diagnose yourself. You need three tests: is it different from your normal, does it keep happening, and did several things shift around the same time.<br><br>If the answer is yes — write it down. What changed, when, and what travels together. Three lines.<br><br>Save this for the next time you catch yourself saying “I’m probably just tired.”<br><br>And tell me in the comments: what’s the thing you’ve been explaining away?</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Primary: Save. Conversation: What have you been explaining away?</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">SELFIE · SAY: I realised when I was writing today&#x27;s post that I had an explanation for literally everything that was happening to me.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">SAY: Exhausted? Running a company. Not sleeping? Stress. Cycle changing? Nearly forty. There was always a reason.<br>ON SCREEN: And every reason sounded reasonable.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">SAY: The question I wasn&#x27;t asking was: how many things have changed?</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">POLL: Have you been telling yourself “I’m probably just tired”?<br>YES / ALL THE TIME</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">Share Tuesday carousel.<br>ON SCREEN: Three tests before you explain it away again.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Wednesday</span>
+          <span class="d-title">FIVE SYMPTOMS. FIVE APPOINTMENTS.</span>
+          <span class="d-chips"><span class="chip fmt">Reel</span><span class="chip cta forest">Comment</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Introduce fragmentation without attacking doctors. Pull comments (how many practitioners?).</div></div>
+          <div class="fld field"><span class="fld-l">Purpose (original)</span><div class="fld-b">Introduce fragmentation without attacking doctors.</div></div>
+<div class="fld field"><span class="fld-l">Cover / on-screen hook</span><div class="fld-b">FIVE SYMPTOMS.<br>FIVE APPOINTMENTS.<br><br>Who sees the whole picture?</div></div>
+<div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">At some point last year I realised that I had somehow become... like... five different patients.<br><br>[BEAT]<br><br>I had the gynaecologist for the pain and the changes in my cycle.<br><br>The endocrinologist for the hormones, the weight, the exhaustion.<br><br>The dermatologist because my skin was doing something really strange.<br><br>My GP.<br><br>A psychologist.<br><br>[SMALL SMILE]<br><br>I even went to an energy healer at some point because... honestly, I was trying everything.<br><br>[BEAT]<br><br>And individually, all of that made sense.<br><br>You have a skin problem, you see a dermatologist.<br><br>You have a problem with your cycle, you see a gynaecologist.<br><br>That&#x27;s how healthcare works.<br><br>But I remember thinking...<br><br>[BEAT]<br><br>I&#x27;m one woman.<br><br>This is one body.<br><br>And all of these things are happening at the same time.<br><br>[BEAT]<br><br>So... who is looking at the whole picture?</div></div>
+<div class="fld film"><span class="fld-l">How to film / on-screen</span><div class="fld-b">Practitioner sequence overlays: CYCLE + PAIN / HORMONES + ENERGY / SKIN / MENTAL LOAD. End frame: ONE WOMAN. ONE BODY. ONE TIMELINE.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">I wasn&#x27;t five different patients.<br><br>I was one woman carrying one increasingly complicated timeline.<br><br>How many different practitioners have you seen while trying to understand one period of feeling “off”?<br><br>Give me the number 👇</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Give me the number.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: GYNAECOLOGIST · ENDOCRINOLOGIST · DERMATOLOGIST · GP · PSYCHOLOGIST</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">SELFIE · SAY: At one point this was basically my life. And every appointment made sense individually.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">SAY: But I was the only person going to all of them. That was the moment I thought: Wait. Who actually has the whole timeline?</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">POLL: How many practitioners have you seen during one health issue?<br>1–2 / 3+</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">Share Reel.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Thursday</span>
+          <span class="d-title">BRING THE WHOLE PICTURE</span>
+          <span class="d-chips"><span class="chip fmt">Utility Carousel</span><span class="chip fmt ghost">9 SLIDES</span><span class="chip cta gold">Save</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Give a genuinely useful appointment-prep tool. Earn saves and authority.</div></div>
+          <div class="sf"><span class="sf-l">SLIDE 01</span><div class="sf-b">BEFORE YOUR NEXT APPOINTMENT<br><br>BRING THE WHOLE PICTURE<br><br>Six things worth writing down first.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 02</span><div class="sf-b">1 · WHAT CHANGED?<br><br>Start with what is different from your normal.<br><br>Instead of: “My sleep is bad.”<br><br>Try: “I used to sleep through the night. Now I wake most nights.”</div></div>
+<div class="sf"><span class="sf-l">SLIDE 03</span><div class="sf-b">2 · WHEN DID IT START?<br><br>You don’t need an exact date.<br><br>“Around February.”<br>“After I stopped breastfeeding.”<br>“A few months after changing medication.”<br><br>Approximate timing is still useful.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 04</span><div class="sf-b">3 · WHAT ELSE CHANGED AROUND THEN?<br><br>Sleep changed. Then your cycle. Then your skin. Then your energy.<br><br>You don&#x27;t need to decide whether they&#x27;re connected. Keep the timeline.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 05</span><div class="sf-b">4 · IS THERE A PATTERN?<br><br>Every day? Before your period? After eating? Morning? Evening? During stressful periods?<br><br>“When” can be as useful as “what.”</div></div>
+<div class="sf"><span class="sf-l">SLIDE 06</span><div class="sf-b">5 · WHAT HAS ALREADY BEEN CHECKED?<br><br>Bring previous results if you have them. Write down previous tests, consultations and treatments.<br><br>Don&#x27;t make yourself reconstruct everything from memory in the room.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 07</span><div class="sf-b">6 · WHAT DO YOU WANT FROM THIS APPOINTMENT?<br><br>Try:<br>“I want to understand what might explain this change.”<br>“What do you think is worth considering?”<br>“If this continues, what happens next?”</div></div>
+<div class="sf"><span class="sf-l">SLIDE 08 · SCREENSHOT THIS</span><div class="sf-b">MY APPOINTMENT NOTE<br><br>What changed: ______<br>Started around: ______<br>Changed around the same time: ______<br>Pattern I’ve noticed: ______<br>Already checked: ______<br>What I want to ask today: ______</div></div>
+<div class="sf"><span class="sf-l">SLIDE 09</span><div class="sf-b">You don’t need to arrive with the answer.<br><br>You need to make the story easier to follow.<br><br>Save this before your next appointment.<br><br>Educational only.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">If you have an appointment coming up, don’t spend an hour trying to reconstruct your entire medical history.<br><br>Start with six things:<br><br>1. What changed? What feels different from your normal?<br>2. When? Approximate is fine.<br>3. What changed around the same time?<br>4. Is there a pattern? Constant? Cyclical? Morning? Evening? After eating? During stressful periods?<br>5. What’s already been checked?<br>6. What do you want from this appointment?<br><br>You don’t need to arrive with a theory about what’s wrong.<br><br>You need to make your story easier to understand.<br><br>Save this before your next appointment.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Save before your next appointment.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: APPOINTMENT TOMORROW? Don’t reconstruct your entire life in the waiting room.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: Write: WHAT CHANGED? WHEN? WHAT CHANGED AROUND THEN?</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: Then: WHAT PATTERN HAVE I NOTICED? WHAT HAS ALREADY BEEN CHECKED? WHAT DO I WANT TO ASK?</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">SELFIE · SAY: You don&#x27;t need to arrive knowing what&#x27;s wrong. You just want the story to be easy to follow.</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">Share carousel.<br>ON SCREEN: Save this one.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Friday</span>
+          <span class="d-title">I REALLY THOUGHT WE’D MADE IT.</span>
+          <span class="d-chips"><span class="chip fmt">Founder Cutdown</span><span class="chip cta gold">Watch</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Re-hook the founder film mid-week and drive Part 1 watch-through.</div></div>
+          <div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">But 2024 felt different.<br><br>Sales were stronger.<br><br>The team was finding its feet.<br><br>Stronger community.<br><br>Awards.<br><br>And I remember thinking...<br><br>[BEAT]<br><br>Oh my God.<br><br>We might actually pull this off.<br><br>[HOLD]<br><br>And then our lead investor decided not to support the next round of funding.<br><br>We had built the 2025 plan around it.<br><br>[BEAT]<br><br>I thought losing the company would be the worst part.<br><br>It wasn’t.</div></div>
+<div class="fld film"><span class="fld-l">How to film / on-screen</span><div class="fld-b">End frame: PART 1 · WATCH NOW</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">I really thought we&#x27;d made it through the worst.<br><br>We hadn&#x27;t.<br><br>Part 1 is up now.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Watch Part 1.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">Archive clip.<br>TEXT: This was the moment I thought: “We might actually pull this off.”</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">Black screen.<br>TEXT: We didn&#x27;t.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">Founder cutdown.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">LINK/STICKER: WATCH PART 1</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Saturday</span>
+          <span class="d-title">YOUR SYMPTOMS ARE NOT SEPARATE TABS</span>
+          <span class="d-chips"><span class="chip fmt">Static Editorial</span><span class="chip cta mute">None</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Crystallise the week&#x27;s thesis in one shareable editorial frame. Let it land.</div></div>
+          <div class="fld field"><span class="fld-l">Cover / on-screen hook</span><div class="fld-b">YOUR SYMPTOMS<br>ARE NOT<br>SEPARATE TABS.<br><br>You live in one body.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">Your dermatologist may focus on your skin.<br><br>Your gynaecologist on your cycle.<br><br>Your endocrinologist on hormones and metabolism.<br><br>That’s not a criticism. Specialisation matters.<br><br>But you are often the person moving between all of them.<br><br>Which means you’re also the person carrying the timeline.<br><br>You don’t have to decide what connects.<br><br>But you can make sure the whole story arrives in the room with you.<br><br>One body. Many signals.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">None. Let it land.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: SKIN</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: CYCLE</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: ENERGY</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: SLEEP</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">TEXT: Different tabs in your medical file. Same body in real life.</div></div>
+<div class="frame"><span class="frame-n">FRAME 6</span><div class="frame-b">Share static.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Sunday</span>
+          <span class="d-title">“BUT WHAT IF THEY’RE NOT CONNECTED?”</span>
+          <span class="d-chips"><span class="chip fmt">Community Reel</span><span class="chip cta forest">Comment</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Pre-empt the main objection and protect the pattern-is-not-one-cause boundary. Open next week.</div></div>
+          <div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">Yes.<br><br>They might not be.<br><br>And this is really important.<br><br>Looking at five symptoms together does not mean deciding that all five have one cause.<br><br>That would be doing exactly what we&#x27;re trying not to do.<br><br>[BEAT]<br><br>The point is:<br><br>These things changed.<br><br>This is roughly when they changed.<br><br>This is what seems to happen together.<br><br>And then you take that information into the conversation.<br><br>Pattern recognition is a starting point for better questions.<br><br>It is not a diagnosis.<br><br>And sometimes the answer will be that two things have absolutely nothing to do with each other.<br><br>That&#x27;s okay too.</div></div>
+<div class="fld film"><span class="fld-l">How to film / on-screen</span><div class="fld-b">End frame: LOOK TOGETHER. DON’T JUMP TO CONCLUSIONS.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">Looking at symptoms together ≠ deciding they all have one cause.<br><br>That distinction matters.<br><br>Pattern recognition is a starting point for better questions, not a diagnosis.<br><br>What health question should I unpack next? ↓</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Question in comments.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">SELFIE · SAY: I want to make one thing very clear after this week. Looking at symptoms together does not mean deciding they have one cause.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: TOGETHER ≠ SAME CAUSE</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">SAY: Sometimes they connect. Sometimes they don&#x27;t. The useful thing is not throwing away the timing before anyone has had a chance to look at it.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">QUESTION BOX: What health question do you want me to unpack?</div></div>
+</div>
+        </div>
+      </details></div>
+    </section>
+
+    <section id="w2" class="tabpane">
+      <h2 class="wk-h">WEEK 02 · FRAGMENTATION</h2>
+      <div class="gridwrap"><table class="grid"><thead><tr><th>Day</th><th>Format</th><th>Piece</th><th>Objective</th><th>CTA</th></tr></thead><tbody><tr><td class="g-day">Monday</td><td><span class="chip fmt">Founder Film 02</span></td><td class="g-title">HOW DID I BECOME FIVE DIFFERENT PATIENTS?</td><td class="g-obj">Move from business story to body story. Dramatise fragmentation; invite practitioner-count comments.</td><td><span class="chip cta forest">Comment</span></td></tr><tr><td class="g-day">Tuesday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">“YOUR BLOODS ARE FINE.”</td><td class="g-obj">Reframe a reassuring-but-unresolved result into a better next question.</td><td><span class="chip cta gold">Save</span></td></tr><tr><td class="g-day">Wednesday</td><td><span class="chip fmt">Carousel</span></td><td class="g-title">WHAT YOUR TIMELINE KNOWS THAT A SYMPTOM LIST DOESN’T</td><td class="g-obj">Teach timeline &gt; symptom-list. Drive saves and timeline-building behaviour.</td><td><span class="chip cta gold">Save</span></td></tr><tr><td class="g-day">Thursday</td><td><span class="chip fmt">Utility Carousel</span></td><td class="g-title">“NORMAL” RESULTS: 4 QUESTIONS TO ASK NEXT</td><td class="g-obj">Equip self-advocacy after a &#x27;normal&#x27; result. Save-worthy utility.</td><td><span class="chip cta gold">Save</span></td></tr><tr><td class="g-day">Friday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">THE 2AM GOOGLE PROBLEM</td><td class="g-obj">Light relatability. Shareable; reframe Google-possibilities vs clinical context.</td><td><span class="chip cta gold">Share</span></td></tr><tr><td class="g-day">Saturday</td><td><span class="chip fmt">Carousel</span></td><td class="g-title">RED ON WHOSE SKIN?</td><td class="g-obj">Phototype differentiator (the moat) + 4.5.6 credibility. Earn shares.</td><td><span class="chip cta gold">Share</span></td></tr><tr><td class="g-day">Sunday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">WHAT TBT DOESN’T DO</td><td class="g-obj">State product boundaries explicitly to build trust before the Week 3/4 turn.</td><td><span class="chip cta mute">None</span></td></tr></tbody></table></div>
+      <div class="daycards">
+      <details class="day">
+        <summary>
+          <span class="d-day">Monday</span>
+          <span class="d-title">HOW DID I BECOME FIVE DIFFERENT PATIENTS?</span>
+          <span class="d-chips"><span class="chip fmt">Founder Film 02</span><span class="chip cta forest">Comment</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Move from business story to body story. Dramatise fragmentation; invite practitioner-count comments.</div></div>
+          <div class="fld field"><span class="fld-l">Cover / on-screen hook</span><div class="fld-b">HOW DID I BECOME FIVE DIFFERENT PATIENTS?<br>The Body Tell · Part 2</div></div>
+<div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">When the company stopped, for the first time in years... I stopped.<br><br>And I mean really stopped.<br><br>I had started working when I was fifteen.<br><br>So by the time I turned forty, I had basically spent twenty-five years working, striving, building, doing something.<br><br>And the last six years with 4.5.6 were intense.<br><br>So when it ended, I didn’t immediately reinvent myself.<br><br>I didn’t start another company.<br><br>I didn’t do the whole “failure is just feedback, now watch me come back stronger” thing.<br><br>[SMALL SMILE]<br><br>I was tired.<br><br>I grieved.<br><br>I spent time with my family.<br><br>I went into nature.<br><br>I danced.<br><br>I sang.<br><br>I laughed.<br><br>I just... lived.<br><br>[BEAT]<br><br>And then I started paying attention to my body.<br><br>Because for years I had an explanation for everything.<br><br>I was exhausted because I was running a company.<br><br>I was waking at three in the morning because I was stressed.<br><br>Brain fog? Stress.<br><br>The eleven o’clock crash? Stress.<br><br>Weight gain? Stress.<br><br>And then the company was gone.<br><br>[BEAT]<br><br>But my body was still not okay.<br><br>My cycle had become unpredictable.<br><br>I had PMS that was completely new for me.<br><br>My hair and nails were breaking.<br><br>I was getting breathless.<br><br>I had pain around my uterus even though, structurally, things looked healthy.<br><br>My skin was doing things I had never seen before, including on the soles of my feet.<br><br>And I thought... maybe this is perimenopause?<br><br>But the bloodwork I had at the time didn’t point clearly to that either.<br><br>So I started seeing people.<br><br>Gynaecologist.<br><br>Endocrinologist.<br><br>Dermatologist.<br><br>GP.<br><br>Psychologist.<br><br>At one point, an energy healer.<br><br>[SMALL LAUGH]<br><br>I was trying.<br><br>But every appointment was about the thing that belonged in that room.<br><br>And I remember thinking:<br><br>How did I turn into five different patients?<br><br>[BEAT]<br><br>I’m one woman.<br><br>One body.<br><br>And all of this is happening at the same time.<br><br>So who is looking at all of it together?<br><br>[BEAT]<br><br>That question changed everything for me.<br><br>Part Three is what happened when somebody finally started looking at the pattern.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">I wasn&#x27;t five different patients.<br><br>But that is what the process started to feel like.<br><br>One body. One increasingly complicated timeline. And every room was looking at a different part of it.<br><br>Part 2.<br><br>How many practitioners have been part of your own search for answers?</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Comment with the number.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">SELFIE: Part 2 is where the business story becomes the body story.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">POLL: Have you ever seen 3+ practitioners during the same period of feeling unwell?<br>YES / NO</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">SAY: I did. And every appointment made sense. What didn&#x27;t make sense was that nobody had the whole timeline except me.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">Share Part 2.</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">QUESTION BOX: How many practitioners?</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Tuesday</span>
+          <span class="d-title">“YOUR BLOODS ARE FINE.”</span>
+          <span class="d-chips"><span class="chip fmt">Reel</span><span class="chip cta gold">Save</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Reframe a reassuring-but-unresolved result into a better next question.</div></div>
+          <div class="fld field"><span class="fld-l">Cover / on-screen hook</span><div class="fld-b">“YOUR BLOODS ARE FINE.”<br><br>Okay. But I still don’t feel like myself.</div></div>
+<div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">Can we talk about the phrase “your bloods are fine” for a second?<br><br>Because hearing that can be reassuring.<br><br>It can rule out things your doctor was worried about.<br><br>That&#x27;s good.<br><br>[BEAT]<br><br>But where I think we get confused is when we turn:<br><br>“These results don&#x27;t show an obvious problem”<br><br>into:<br><br>“Therefore nothing is happening.”<br><br>Those are not the same sentence.<br><br>If the results are reassuring but you still don&#x27;t feel like yourself, the next question can simply be:<br><br>“Okay. What do we look at next?”<br><br>Not:<br><br>“Google says I have this.”<br><br>Not:<br><br>“I need twenty-seven more tests.”<br><br>Just:<br><br>“This has changed from my normal. It has continued. What do you think we should consider next?”</div></div>
+<div class="fld film"><span class="fld-l">How to film / on-screen</span><div class="fld-b">End frame: A REASSURING RESULT DOESN’T ALWAYS ANSWER THE ORIGINAL QUESTION.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">A reassuring result can be genuinely good news.<br><br>It can also leave the original question unanswered.<br><br>Both things can be true.<br><br>If you&#x27;re still experiencing a persistent change, ask what the result answered and what the next step is if the symptoms continue.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Save the question.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">Has anyone ever told you your results were normal while you still felt different?<br>POLL: YES / NO</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">SELFIE: Normal results can be genuinely reassuring. The question is what they answered.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: WHAT DID THIS TEST RULE OUT?</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: WHAT DO WE DO IF THE SYMPTOMS CONTINUE?</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">Share Reel.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Wednesday</span>
+          <span class="d-title">WHAT YOUR TIMELINE KNOWS THAT A SYMPTOM LIST DOESN’T</span>
+          <span class="d-chips"><span class="chip fmt">Carousel</span><span class="chip fmt ghost">8 SLIDES</span><span class="chip cta gold">Save</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Teach timeline &gt; symptom-list. Drive saves and timeline-building behaviour.</div></div>
+          <div class="sf"><span class="sf-l">SLIDE 01</span><div class="sf-b">A SYMPTOM LIST TELLS ME WHAT.<br><br>A TIMELINE TELLS ME WHAT CHANGED TOGETHER.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 02</span><div class="sf-b">Imagine the list says:<br><br>Poor sleep.<br>Fatigue.<br>Cycle changes.<br>Hair shedding.<br>Brain fog.<br><br>Useful. But incomplete.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 03</span><div class="sf-b">Now add:<br><br>Sleep changed in February.<br>Fatigue became noticeable in March.<br>Cycle changed around April.<br>Hair shedding followed.<br><br>That is different information.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 04</span><div class="sf-b">TIMING DOESN’T PROVE CAUSE.<br><br>Read that again.<br><br>Things happening around the same time does not prove that one caused the other.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 05</span><div class="sf-b">But timing helps preserve the question:<br><br>Why did several things change during the same period?</div></div>
+<div class="sf"><span class="sf-l">SLIDE 06</span><div class="sf-b">Your timeline can include:<br><br>New medication.<br>Pregnancy/postpartum.<br>Stopping contraception.<br>Major stress.<br>Illness.<br>Weight change.<br>Life-stage change.<br>Anything that genuinely changed.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 07</span><div class="sf-b">You are not building a case for a diagnosis.<br><br>You are giving the person treating you a better chronology.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 08</span><div class="sf-b">DON’T JUST LIST YOUR SYMPTOMS.<br><br>Put them in time.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">A symptom list tells someone what is happening.<br><br>A timeline tells them what changed, and in what order.<br><br>That doesn&#x27;t prove that the symptoms share a cause.<br><br>It does stop useful chronology from disappearing.<br><br>If several things changed during the same period, write that down.<br><br>A rough month is enough.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Save and build your timeline.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">Poor sleep. Fatigue. Cycle changes. Hair shedding.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: That&#x27;s a symptom list.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: Now add WHEN each changed. That&#x27;s a timeline.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: Timing ≠ cause.</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">TEXT: But timing is still information. Share carousel.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Thursday</span>
+          <span class="d-title">“NORMAL” RESULTS: 4 QUESTIONS TO ASK NEXT</span>
+          <span class="d-chips"><span class="chip fmt">Utility Carousel</span><span class="chip fmt ghost">8 SLIDES</span><span class="chip cta gold">Save</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Equip self-advocacy after a &#x27;normal&#x27; result. Save-worthy utility.</div></div>
+          <div class="sf"><span class="sf-l">SLIDE 01</span><div class="sf-b">YOUR RESULTS CAME BACK “NORMAL.”<br><br>What do you ask next?</div></div>
+<div class="sf"><span class="sf-l">SLIDE 02</span><div class="sf-b">First:<br><br>Normal results can be good news.<br><br>Don&#x27;t turn reassurance into disappointment just because you still have questions.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 03</span><div class="sf-b">1 · WHAT DID THIS RESULT HELP RULE OUT?<br><br>This helps you understand what the test actually answered.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 04</span><div class="sf-b">2 · WHAT DOES IT NOT EXPLAIN?<br><br>Your original symptom may still need an explanation.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 05</span><div class="sf-b">3 · DOES ANYTHING IN MY HISTORY OR SYMPTOM PATTERN CHANGE HOW YOU INTERPRET THIS?<br><br>Context matters.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 06</span><div class="sf-b">4 · IF THIS CONTINUES, WHEN SHOULD WE REASSESS?<br><br>You want a next step. Not endless waiting.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 07</span><div class="sf-b">You don&#x27;t need to argue with a normal result.<br><br>You can ask what it tells you.<br><br>And what it doesn&#x27;t.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 08</span><div class="sf-b">SAVE THESE FOUR QUESTIONS.<br><br>Educational only.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">“Normal” is information.<br><br>It is not always an explanation.<br><br>The useful question isn&#x27;t:<br><br>“How do I prove something is wrong?”<br><br>It’s:<br><br>“What did this result answer, what remains unexplained, and what happens if the symptoms continue?”<br><br>Save these four questions if you have a follow-up appointment coming.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Save.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: Screenshot this before your follow-up.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: What did this result help rule out?</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: What doesn&#x27;t it explain?</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: If this continues, when should we reassess?</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">Share carousel.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Friday</span>
+          <span class="d-title">THE 2AM GOOGLE PROBLEM</span>
+          <span class="d-chips"><span class="chip fmt">Reel</span><span class="chip cta gold">Share</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Light relatability. Shareable; reframe Google-possibilities vs clinical context.</div></div>
+          <div class="fld field"><span class="fld-l">Cover / on-screen hook</span><div class="fld-b">THE PROBLEM WITH GOOGLING FIVE SYMPTOMS AT 2AM</div></div>
+<div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">You know what happens when you Google five symptoms at two in the morning.<br><br>[LOOK]<br><br>You have twelve diseases and approximately three hours left to live.<br><br>[SMALL LAUGH]<br><br>The internet is very good at telling you what a symptom can mean.<br><br>But “can mean” is an enormous category.<br><br>What matters in an actual medical conversation is context.<br><br>Your history.<br><br>Timing.<br><br>Age.<br><br>Medication.<br><br>Cycle.<br><br>What else is happening.<br><br>What has already been checked.<br><br>So I stopped asking:<br><br>“What disease causes this symptom?”<br><br>And started asking:<br><br>“What information would help someone understand what is happening?”<br><br>Much less dramatic.<br><br>Much more useful.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">Google gives possibilities.<br><br>A medical conversation needs context.<br><br>Those are different jobs.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Send this to your 2am symptom-search friend.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">POLL: Have you Googled symptoms after midnight?<br>OBVIOUSLY / NEVER</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: And did Google make you calmer?<br>😂 / ABSOLUTELY NOT</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: “Can mean” is not the same as “this is what you have.”</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">Share Reel.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Saturday</span>
+          <span class="d-title">RED ON WHOSE SKIN?</span>
+          <span class="d-chips"><span class="chip fmt">Carousel</span><span class="chip fmt ghost">9 SLIDES</span><span class="chip cta gold">Share</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Phototype differentiator (the moat) + 4.5.6 credibility. Earn shares.</div></div>
+          <div class="sf"><span class="sf-l">SLIDE 01</span><div class="sf-b">“LOOK FOR REDNESS.”<br><br>Red on whose skin?</div></div>
+<div class="sf"><span class="sf-l">SLIDE 02</span><div class="sf-b">A lot of health language was built around what visible signs look like on lighter skin.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 03</span><div class="sf-b">On deeper skin tones, inflammation or colour change may not look bright red.<br><br>It may appear darker, purple, brown, grey, or simply different from the surrounding skin.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 04</span><div class="sf-b">That matters because visible signs are still body signals.<br><br>But the words used to describe them do not always work equally well on every body.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 05</span><div class="sf-b">This is something I already knew from 4.5.6 Skin:<br><br>one kind of skin should never quietly become the default skin.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 06</span><div class="sf-b">It is one reason The Body Tell asks about skin phototype.<br><br>Where a visible signal is relevant, context matters.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 07</span><div class="sf-b">Skin tone does not determine your hormonal pattern.<br><br>And not every signal changes because of skin tone.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 08</span><div class="sf-b">The point is simpler.<br><br>If we&#x27;re asking women about visible signs, the description needs to make sense on their skin.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 09</span><div class="sf-b">NO BODY IS THE DEFAULT.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">I spent six years building around a problem that sounds obvious once you see it:<br><br>You cannot study one kind of skin and quietly call it everybody.<br><br>I carried that lesson with me.<br><br>Skin tone is not a diagnosis. It doesn&#x27;t determine your hormone pattern.<br><br>But when a body signal is visible on the skin, how we describe that signal matters.<br><br>Context belongs in the reading.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Share if this language has ever failed you.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: What colour is “redness” on brown skin?</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: Sometimes... not red.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: The language of visible signs was not always written with every skin tone in mind.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: This matters to me because of everything we learned building 4.5.6.</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">Share carousel.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Sunday</span>
+          <span class="d-title">WHAT TBT DOESN’T DO</span>
+          <span class="d-chips"><span class="chip fmt">Reel</span><span class="chip cta mute">None</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">State product boundaries explicitly to build trust before the Week 3/4 turn.</div></div>
+          <div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">Quick distinction because this matters to me.<br><br>The Body Tell does not diagnose you.<br><br>It does not tell you to ignore your doctor.<br><br>It does not promise that five symptoms have one root cause.<br><br>And it doesn&#x27;t tell you that a reassuring test result is secretly wrong.<br><br>What it does is much simpler.<br><br>It helps you gather what changed.<br><br>Look at what appears together.<br><br>Organise the timeline.<br><br>And turn that into something easier to discuss.<br><br>I wanted a better starting point.<br><br>Not another person on the internet pretending to know exactly what is wrong with your body.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">Better organised information.<br><br>Better questions.<br><br>Clear boundaries.<br><br>That&#x27;s the job.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">None.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: TBT DOES: Organise signals.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: TBT DOES: Preserve timing + relationships.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: TBT DOESN&#x27;T: Diagnose.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: TBT DOESN&#x27;T: Replace medical care.</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">QUESTION BOX: What do you want me to explain next?</div></div>
+</div>
+        </div>
+      </details></div>
+    </section>
+
+    <section id="w3" class="tabpane">
+      <h2 class="wk-h">WEEK 03 · PATTERN</h2>
+      <div class="gridwrap"><table class="grid"><thead><tr><th>Day</th><th>Format</th><th>Piece</th><th>Objective</th><th>CTA</th></tr></thead><tbody><tr><td class="g-day">Monday</td><td><span class="chip fmt">Founder Film 03</span></td><td class="g-title">WHEN “YOU’RE FINE” DOESN’T END THE QUESTION</td><td class="g-obj">The cost and time of the search. The &#x27;how do other women do this?&#x27; turn; empathy + comments.</td><td><span class="chip cta forest">Comment</span></td></tr><tr><td class="g-day">Tuesday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">SAME FATIGUE. DIFFERENT QUESTION.</td><td class="g-obj">Show how context upgrades a single symptom. Includes an acute-symptom safety note.</td><td><span class="chip cta gold">Save</span></td></tr><tr><td class="g-day">Wednesday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">SKIN + HAIR + CYCLE</td><td class="g-obj">Show a real cluster (androgen/PCOS) while holding the no-diagnosis line.</td><td><span class="chip cta gold">Save</span></td></tr><tr><td class="g-day">Thursday</td><td><span class="chip fmt">Carousel</span></td><td class="g-title">FATIGUE ISN’T ONE QUESTION</td><td class="g-obj">Teach clusters (iron / thyroid / metabolic / sleep) as better questions, not answers.</td><td><span class="chip cta gold">Save</span></td></tr><tr><td class="g-day">Friday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">I THOUGHT IT WAS PERIMENOPAUSE</td><td class="g-obj">Model intellectual humility; counter checklist-diagnosis content. Pull comments.</td><td><span class="chip cta forest">Comment</span></td></tr><tr><td class="g-day">Saturday</td><td><span class="chip fmt">Carousel</span></td><td class="g-title">WHAT DOES “PALE” MEAN ON DEEPER SKIN?</td><td class="g-obj">Phototype differentiator #2. Credibility + shares.</td><td><span class="chip cta gold">Share</span></td></tr><tr><td class="g-day">Sunday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">PATTERN ≠ DIAGNOSIS</td><td class="g-obj">Lock the pattern-is-not-diagnosis distinction before the Week 4 reveal.</td><td><span class="chip cta mute">None</span></td></tr></tbody></table></div>
+      <div class="daycards">
+      <details class="day">
+        <summary>
+          <span class="d-day">Monday</span>
+          <span class="d-title">WHEN “YOU’RE FINE” DOESN’T END THE QUESTION</span>
+          <span class="d-chips"><span class="chip fmt">Founder Film 03</span><span class="chip cta forest">Comment</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">The cost and time of the search. The &#x27;how do other women do this?&#x27; turn; empathy + comments.</div></div>
+          <div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">After 4.5.6 closed, I tried for a while to sell some of the assets.<br><br>I met people who looked legitimate.<br><br>Conversations started.<br><br>Nothing really came of them.<br><br>And eventually I had to accept that 4.5.6 was gone.<br><br>[BEAT]<br><br>But by then I had another problem.<br><br>I still didn&#x27;t feel like myself.<br><br>And I had good doctors.<br><br>This is important.<br><br>This isn&#x27;t a story about every doctor being terrible and one magical person finally saving me.<br><br>It wasn&#x27;t like that.<br><br>But I kept hearing versions of:<br><br>You&#x27;ve been through a burnout.<br><br>You&#x27;re tired.<br><br>Things look okay.<br><br>And after a while, when people keep telling you that you&#x27;re fine...<br><br>you start wondering if maybe you&#x27;re making too much of it.<br><br>You edit yourself.<br><br>You stop mentioning certain things.<br><br>You think...<br><br>Okay.<br><br>Maybe this is just what forty feels like.<br><br>[BEAT]<br><br>But I still had the same question.<br><br>Why was nobody looking at the timing?<br><br>What started together?<br><br>What had changed from my normal?<br><br>Why was I treating my sleep, cycle, skin, energy and mood like five unrelated stories?<br><br>After almost a year of the breathlessness, someone recommended a functional doctor to me.<br><br>And for the first time, I felt like someone sat with the whole timeline.<br><br>Not because functional medicine is magically better.<br><br>It was the process.<br><br>The questions were different.<br><br>The symptoms were being looked at together.<br><br>[BEAT]<br><br>And then came consultations.<br><br>Blood tests.<br><br>More tests.<br><br>Results.<br><br>Prescriptions.<br><br>Follow-ups.<br><br>More results.<br><br>It took months.<br><br>I&#x27;m still in treatment.<br><br>And I&#x27;m incredibly grateful because I feel much more like myself again.<br><br>But I remember thinking...<br><br>I can only do this because I have time right now.<br><br>If I were still running 4.5.6, would I have done all of this?<br><br>Or would I have said:<br><br>“I&#x27;ll deal with it next month.”<br><br>[BEAT]<br><br>What does a mother with three children do?<br><br>What does a woman running a company do?<br><br>What does the person carrying an entire household do?<br><br>Because getting useful answers had basically become a part-time job.<br><br>And that is when another question started bothering me.<br><br>Why is the starting point so hard?<br><br>[BEAT]<br><br>Part Four is what I built because I couldn&#x27;t stop thinking about that question.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">The money wasn&#x27;t the part of this process I remember most.<br><br>It was the time.<br><br>Appointments. Tests. Results. More appointments. Telling the same story again.<br><br>I could do it because, for once, I wasn&#x27;t running a company.<br><br>And I kept thinking about the women who don&#x27;t have that time.<br><br>Part 3.<br><br>Have you ever put your health on hold because dealing with it felt like another job?</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Tell me yes/no, or what got postponed.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">POLL: Have you ever stopped mentioning a symptom because you felt like you were making too much of it?<br>YES / NO</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">SELFIE: I did. When you&#x27;re repeatedly reassured, sometimes you start editing the story yourself.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: And reassurance can be appropriate. But persistent change still deserves a clear next step.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">Share Part 3.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Tuesday</span>
+          <span class="d-title">SAME FATIGUE. DIFFERENT QUESTION.</span>
+          <span class="d-chips"><span class="chip fmt">Reel</span><span class="chip cta gold">Save</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Show how context upgrades a single symptom. Includes an acute-symptom safety note.</div></div>
+          <div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">“I’m tired” tells you almost nothing by itself.<br><br>Watch what happens when I add context.<br><br>“I’m tired.”<br><br>Okay.<br><br>“I’m tired and my periods have become much heavier.”<br><br>Different question.<br><br>“I’m tired, my periods are heavier, and I&#x27;ve started feeling breathless doing things that used to be easy.”<br><br>Now that combination is worth bringing into one conversation.<br><br>It still doesn&#x27;t diagnose the cause.<br><br>That&#x27;s the point.<br><br>A cluster doesn&#x27;t give you certainty.<br><br>It gives you a better question.</div></div>
+<div class="fld film"><span class="fld-l">How to film / on-screen</span><div class="fld-b">End frame: FATIGUE + HEAVIER BLEEDING + BREATHLESSNESS ≠ diagnosis = context worth raising.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">Fatigue can have many causes.<br><br>So can breathlessness.<br><br>So can changes in bleeding.<br><br>The point isn&#x27;t that putting them together suddenly gives you a diagnosis.<br><br>It doesn&#x27;t.<br><br>The point is that if several changes are happening in the same body during the same period, your clinician should have the whole story.<br><br>And one safety note: new or severe breathlessness, fainting, chest pain or very heavy bleeding can need urgent medical attention. Don&#x27;t wait for Instagram to interpret acute symptoms.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Save.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: “I’m tired.”</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: “I’m tired + my periods became much heavier.”</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: “I’m tired + heavier bleeding + new breathlessness.”</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: Same word: fatigue. More context.</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">Share Reel.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Wednesday</span>
+          <span class="d-title">SKIN + HAIR + CYCLE</span>
+          <span class="d-chips"><span class="chip fmt">Reel</span><span class="chip cta gold">Save</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Show a real cluster (androgen/PCOS) while holding the no-diagnosis line.</div></div>
+          <div class="fld field"><span class="fld-l">Cover / on-screen hook</span><div class="fld-b">THREE COMPLAINTS? OR ONE CLUSTER WORTH MENTIONING?</div></div>
+<div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">Acne by itself?<br><br>Extremely common.<br><br>An irregular cycle by itself?<br><br>Lots of possible explanations.<br><br>Coarse facial hair?<br><br>Again, context matters.<br><br>But if somebody says:<br><br>“My cycle has become irregular, I&#x27;m getting coarse facial hair that wasn&#x27;t there before, and my acne has changed...”<br><br>I would not want those three things living in three separate notes.<br><br>That combination may be worth discussing with a clinician in the context of androgen-related conditions such as PCOS.<br><br>Does it mean she has PCOS?<br><br>No.<br><br>That is exactly the line.<br><br>Pattern recognition should help you know what to raise.<br><br>Not convince you that you diagnosed yourself on Instagram.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">Three symptoms do not equal one diagnosis.<br><br>But combinations can make certain clinical questions more relevant.<br><br>Cycle changes + new coarse facial hair + acne changes are worth describing together rather than automatically treating each one as a separate cosmetic or cycle issue.<br><br>A clinician still has to assess what they mean in your case.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Save if you&#x27;ve been separating skin, hair and cycle.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: SKIN</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: HAIR</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: CYCLE</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: Three separate complaints? Maybe.</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">TEXT: But if they changed together, say that too.</div></div>
+<div class="frame"><span class="frame-n">FRAME 6</span><div class="frame-b">Share Reel.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Thursday</span>
+          <span class="d-title">FATIGUE ISN’T ONE QUESTION</span>
+          <span class="d-chips"><span class="chip fmt">Carousel</span><span class="chip fmt ghost">8 SLIDES</span><span class="chip cta gold">Save</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Teach clusters (iron / thyroid / metabolic / sleep) as better questions, not answers.</div></div>
+          <div class="sf"><span class="sf-l">SLIDE 01</span><div class="sf-b">FATIGUE ISN’T ONE QUESTION.<br><br>What appears with it matters.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 02</span><div class="sf-b">FATIGUE + HEAVY BLEEDING<br><br>A useful conversation may include blood loss and iron status.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 03</span><div class="sf-b">FATIGUE + FEELING COLD + CONSTIPATION + HAIR CHANGES<br><br>Different cluster.<br><br>Thyroid function may be one of the things worth discussing.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 04</span><div class="sf-b">FATIGUE + CRAVINGS + ENERGY CRASHES<br><br>Different again.<br><br>Metabolic and blood-sugar context may become relevant.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 05</span><div class="sf-b">FATIGUE + BROKEN SLEEP + HIGH STRESS LOAD<br><br>Sleep and stress belong in the picture too.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 06</span><div class="sf-b">None of these clusters diagnoses the cause.<br><br>They stop the word “fatigue” from carrying the entire conversation.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 07</span><div class="sf-b">Instead of:<br><br>“I’m tired.”<br><br>Try:<br><br>“My energy changed around March, and this is what tends to happen with it...”</div></div>
+<div class="sf"><span class="sf-l">SLIDE 08</span><div class="sf-b">SAME SYMPTOM.<br>DIFFERENT CONTEXT.<br>DIFFERENT QUESTION.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">“Fatigue” is a category.<br><br>Your actual experience has timing, companions, triggers and history.<br><br>Fatigue alongside heavy bleeding is a different conversation from fatigue alongside broken sleep.<br><br>That doesn&#x27;t mean you know the cause.<br><br>It means you can describe the problem with more useful context.<br><br>Educational only. These are examples, not diagnostic rules.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Save.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">QUIZ: Which gives more useful context?<br>A: “I&#x27;m tired.”<br>B: “Since March I&#x27;m tired, colder than usual and my hair has changed.”<br>ANSWER: B</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: More information ≠ self-diagnosis.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: It means the clinician gets the actual pattern.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">Share carousel.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Friday</span>
+          <span class="d-title">I THOUGHT IT WAS PERIMENOPAUSE</span>
+          <span class="d-chips"><span class="chip fmt">Reel</span><span class="chip cta forest">Comment</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Model intellectual humility; counter checklist-diagnosis content. Pull comments.</div></div>
+          <div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">I thought I was in perimenopause.<br><br>I was nearly forty.<br><br>My sleep had changed.<br><br>My cycle was changing.<br><br>Mood.<br><br>Weight.<br><br>Brain fog.<br><br>It sounded plausible.<br><br>And maybe that&#x27;s why this matters.<br><br>A plausible explanation can still be incomplete.<br><br>Symptoms associated with perimenopause overlap with a lot of other things.<br><br>So the useful question isn&#x27;t:<br><br>“Which Instagram checklist do I match?”<br><br>It&#x27;s:<br><br>“What changed?”<br><br>“What is happening together?”<br><br>“And what does my clinician think we need to consider?”<br><br>In my case, the process took me somewhere more complicated than the explanation I had started with.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">I wasn&#x27;t ridiculous for wondering about perimenopause.<br><br>It was a reasonable question.<br><br>It just wasn&#x27;t the whole conversation.<br><br>This is why I&#x27;m wary of content that turns “do you have these five symptoms?” into “this is definitely your hormone problem.”<br><br>Overlap is real.<br><br>The question is what your own history, symptoms and clinical assessment point toward.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">What first made you wonder whether your hormones were changing?</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: I genuinely thought: Maybe this is perimenopause.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: And it was a reasonable question.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: Reasonable question ≠ final answer.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">QUESTION BOX: What first made you wonder “is this hormones?”</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Saturday</span>
+          <span class="d-title">WHAT DOES “PALE” MEAN ON DEEPER SKIN?</span>
+          <span class="d-chips"><span class="chip fmt">Carousel</span><span class="chip fmt ghost">7 SLIDES</span><span class="chip cta gold">Share</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Phototype differentiator #2. Credibility + shares.</div></div>
+          <div class="sf"><span class="sf-l">SLIDE 01</span><div class="sf-b">“DO YOU LOOK PALE?”<br><br>On whose skin?</div></div>
+<div class="sf"><span class="sf-l">SLIDE 02</span><div class="sf-b">Pallor is often described simply as:<br><br>“looking pale.”<br><br>Easy language. Not always useful language.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 03</span><div class="sf-b">On deeper skin, changes may be less obvious from facial colour alone.<br><br>Clinicians may also examine areas such as the inner eyelids, mouth, palms or nail beds.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 04</span><div class="sf-b">Why does that matter?<br><br>Because the words used to describe a sign affect whether people recognise it in themselves.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 05</span><div class="sf-b">Skin appearance cannot tell you whether you are anaemic.<br><br>Testing and clinical assessment matter.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 06</span><div class="sf-b">But health education should still explain visible signs in ways that work across different skin tones.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 07</span><div class="sf-b">NO BODY IS THE DEFAULT.<br><br>That includes the language we use to describe symptoms.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">Sometimes inclusion isn&#x27;t a giant new medical theory.<br><br>Sometimes it is asking whether the words we use make sense on everybody.<br><br>“Pale” is a good example.<br><br>Appearance alone cannot diagnose anaemia.<br><br>But if patient education tells everyone to look for the same visible change, without explaining how signs may appear across skin tones, some women are being given less useful information.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Share.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">POLL: Have you ever seen a health graphic where none of the examples looked like your skin?<br>YES / CONSTANTLY</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: This sounds small. It isn&#x27;t if the visual is supposed to help you recognise a sign.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">Share carousel.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Sunday</span>
+          <span class="d-title">PATTERN ≠ DIAGNOSIS</span>
+          <span class="d-chips"><span class="chip fmt">Reel</span><span class="chip cta mute">None</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Lock the pattern-is-not-diagnosis distinction before the Week 4 reveal.</div></div>
+          <div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">I keep using the word “pattern,” so let me tell you exactly what I mean.<br><br>A pattern is:<br><br>What changed.<br><br>What repeats.<br><br>What tends to appear together.<br><br>What seems to make something better or worse.<br><br>That can help decide what is worth discussing next.<br><br>A pattern is not:<br><br>“I have four symptoms from a TikTok, therefore I have this disease.”<br><br>[BEAT]<br><br>Pattern recognition gives direction.<br><br>Diagnosis requires clinical assessment.<br><br>Those two things can work together without pretending they&#x27;re the same thing.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">Direction, not certainty.<br><br>A pattern can help you ask a better question.<br><br>It cannot diagnose you.<br><br>That&#x27;s the distinction.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">None.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: PATTERN = what changed + repeats + appears together.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: DIAGNOSIS = clinical conclusion.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: Not the same thing.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: And good health content should stop pretending they are.</div></div>
+</div>
+        </div>
+      </details></div>
+    </section>
+
+    <section id="w4" class="tabpane">
+      <h2 class="wk-h">WEEK 04 · THE BODY TELL</h2>
+      <div class="gridwrap"><table class="grid"><thead><tr><th>Day</th><th>Format</th><th>Piece</th><th>Objective</th><th>CTA</th></tr></thead><tbody><tr><td class="g-day">Monday</td><td><span class="chip fmt">Founder Film 04</span></td><td class="g-title">I BUILT THE THING I WISH I’D HAD</td><td class="g-obj">Reveal the product as the answer to the whole 4-week question. First Read.</td><td><span class="chip cta terra">First Read</span></td></tr><tr><td class="g-day">Tuesday</td><td><span class="chip fmt">Carousel</span></td><td class="g-title">WHAT ACTUALLY HAPPENS IN A FIRST READ?</td><td class="g-obj">Demystify the mechanic and reduce friction. First Read.</td><td><span class="chip cta terra">First Read</span></td></tr><tr><td class="g-day">Wednesday</td><td><span class="chip fmt">Product Demo Reel</span></td><td class="g-title">LET ME SHOW YOU</td><td class="g-obj">Show the actual flow; build trust through transparency. First Read.</td><td><span class="chip cta terra">First Read</span></td></tr><tr><td class="g-day">Thursday</td><td><span class="chip fmt">Carousel</span></td><td class="g-title">FIRST READ VS PATTERN REPORT</td><td class="g-obj">Clarify free vs €35 honestly so the offer is clean. Start free.</td><td><span class="chip cta terra">First Read</span></td></tr><tr><td class="g-day">Friday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">PLEASE DON’T BRING YOUR DOCTOR 47 SCREENSHOTS</td><td class="g-obj">Sell the Clinical Conversation Brief via humour + utility. See the Pattern Report.</td><td><span class="chip cta terra">See Report</span></td></tr><tr><td class="g-day">Saturday</td><td><span class="chip fmt">Static</span></td><td class="g-title">THE SAME INSTINCT. ONE LAYER DOWN.</td><td class="g-obj">Tie TBT to the 4.5.6 mission for credibility and moat. Let it land.</td><td><span class="chip cta mute">None</span></td></tr><tr><td class="g-day">Sunday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">START WITH WHAT YOU KNOW</td><td class="g-obj">Remove the &#x27;I don&#x27;t know what&#x27;s wrong&#x27; barrier. Final First Read push.</td><td><span class="chip cta terra">First Read</span></td></tr></tbody></table></div>
+      <div class="daycards">
+      <details class="day">
+        <summary>
+          <span class="d-day">Monday</span>
+          <span class="d-title">I BUILT THE THING I WISH I’D HAD</span>
+          <span class="d-chips"><span class="chip fmt">Founder Film 04</span><span class="chip cta terra">First Read</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Reveal the product as the answer to the whole 4-week question. First Read.</div></div>
+          <div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">Eventually, I did start getting answers.<br><br>And yes, burnout had been part of the story.<br><br>A huge part.<br><br>But it wasn&#x27;t the whole story.<br><br>My tests and consultations started identifying other things that needed attention too.<br><br>Thyroid issues.<br><br>My iron stores were extremely low.<br><br>Hormonal imbalances.<br><br>Problems around my cortisol rhythm.<br><br>Nutrient deficiencies.<br><br>[BEAT]<br><br>And I needed doctors.<br><br>I needed bloodwork.<br><br>I needed testing.<br><br>I needed treatment.<br><br>I want to be very clear about that because what I built next is not a replacement for any of it.<br><br>[BEAT]<br><br>But I kept thinking about the part that came before all of that.<br><br>The year of wondering.<br><br>The repeated appointments.<br><br>Telling the story again.<br><br>Forgetting when something started.<br><br>Seeing one person for my cycle and another for my skin and somebody else for the breathlessness.<br><br>And having all of this information... but no single place where it made sense as one story.<br><br>[BEAT]<br><br>And I kept asking:<br><br>Why is the starting point so hard?<br><br>Why couldn&#x27;t I have something that helped me organise what was happening before I walked into the room?<br><br>Not tell me what disease I had.<br><br>Not replace my doctor.<br><br>Just help me see my own timeline and ask better questions.<br><br>[BEAT]<br><br>And then I realised...<br><br>I had actually been here before.<br><br>With 4.5.6, the question was:<br><br>Why is one kind of skin treated as the default?<br><br>And now I was asking a similar question about women&#x27;s health.<br><br>Whose body is the default?<br><br>What gets studied?<br><br>What gets dismissed?<br><br>What does a clinical sign look like on different skin?<br><br>What happens when sleep, cycle, mood, energy, skin and metabolism are all treated as separate complaints?<br><br>[BEAT]<br><br>So I started building.<br><br>It&#x27;s called The Body Tell.<br><br>You go through one guided First Read.<br><br>We ask about what you&#x27;re actually experiencing across your cycle, sleep, energy, skin, hair, mood, metabolism and the wider context.<br><br>And then we look at what appears together.<br><br>Your First Read gives you the primary pattern your answers point toward.<br><br>If you want to go deeper, the full Pattern Report explains that pattern, possible secondary patterns, foundation flags, the signals that drove the reading and markers worth discussing with a qualified professional.<br><br>And it turns the whole thing into a report you can actually take into a medical conversation.<br><br>[BEAT]<br><br>It does not diagnose you.<br><br>It cannot tell you everything that is happening inside your body.<br><br>And it is not going to “fix your hormones in ten minutes.”<br><br>[SMALL SMILE]<br><br>God, please run if anyone promises you that.<br><br>[BEAT]<br><br>What I wanted was a starting point.<br><br>Because I know what it feels like to know something has changed and not know how to explain it.<br><br>And I know how exhausting it is to tell the story over and over again.<br><br>[BEAT]<br><br>So this is what I built.<br><br>The Body Tell.<br><br>Your body keeps a record.<br><br>I want to help you read it.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">Four parts later, this is what I was building toward.<br><br>The Body Tell is the tool I wish I&#x27;d had at the beginning.<br><br>Not something to diagnose me.<br><br>Something to help me organise what was happening before I walked into the room.<br><br>The First Read is open.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Start Your First Read.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">SELFIE: Okay. Four parts later, I can finally show you what all of this became.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: THE BODY TELL</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">SELFIE: This is the thing I wish I had at the beginning, when I knew something had changed but had no idea how to organise it.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: FIRST READ · 12–15 minutes · Primary pattern free</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">LINK: START YOUR FIRST READ</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Tuesday</span>
+          <span class="d-title">WHAT ACTUALLY HAPPENS IN A FIRST READ?</span>
+          <span class="d-chips"><span class="chip fmt">Carousel</span><span class="chip fmt ghost">9 SLIDES</span><span class="chip cta terra">First Read</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Demystify the mechanic and reduce friction. First Read.</div></div>
+          <div class="sf"><span class="sf-l">SLIDE 01</span><div class="sf-b">WHAT ACTUALLY HAPPENS WHEN YOU TAKE A FIRST READ?</div></div>
+<div class="sf"><span class="sf-l">SLIDE 02</span><div class="sf-b">YOU DON’T PICK A CONDITION.<br><br>You tell us what is actually happening.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 03</span><div class="sf-b">We ask across:<br><br>CYCLE<br>SKIN + HAIR<br>SLEEP<br>ENERGY<br>MOOD<br>METABOLISM<br>BODY CHANGES<br>FOUNDATIONS + CONTEXT</div></div>
+<div class="sf"><span class="sf-l">SLIDE 04</span><div class="sf-b">WE LOOK AT RELATIONSHIPS.<br><br>What repeats?<br>What overlaps?<br>What appears together?</div></div>
+<div class="sf"><span class="sf-l">SLIDE 05</span><div class="sf-b">YOUR PRIMARY PATTERN IS NAMED.<br><br>Not as a diagnosis.<br><br>As the strongest pattern your answers point toward.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 06</span><div class="sf-b">You also get a first look at relevant foundation flags and how the pattern may be showing up across the body.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 07</span><div class="sf-b">THEN YOU DECIDE.<br><br>Stop there.<br><br>Or open the full Pattern Report for the deeper reading.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 08</span><div class="sf-b">THE FIRST READ<br><br>12–15 MINUTES<br>PRIMARY PATTERN FREE<br>EDUCATIONAL ONLY</div></div>
+<div class="sf"><span class="sf-l">SLIDE 09</span><div class="sf-b">Your body keeps a record.<br><br>Start Your First Read.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">So what actually happens when you take The Body Tell?<br><br>You don&#x27;t arrive choosing the condition you think you have.<br><br>You tell us what you&#x27;re actually experiencing across your cycle, sleep, energy, skin, hair, mood, metabolism and wider context.<br><br>The reading looks at how those answers travel together.<br><br>At the end, your primary pattern is named.<br><br>Free.<br><br>That is your First Read.<br><br>You can stop there.<br><br>Or, if you want the deeper interpretation, you can open the full Pattern Report.<br><br>No diagnosis.<br><br>No “your hormones are broken.”<br><br>No requirement to know what&#x27;s wrong before you start.<br><br>Start with what you know: what has changed.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Start Your First Read.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: You do not choose what you think you have.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: You answer about what you&#x27;re actually experiencing.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: Cycle. Sleep. Energy. Skin. Hair. Mood. Metabolism. Context.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: The reading looks at the relationships.</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">TEXT: Your First Read names your primary pattern.</div></div>
+<div class="frame"><span class="frame-n">FRAME 6</span><div class="frame-b">TEXT: Educational. Not diagnostic.</div></div>
+<div class="frame"><span class="frame-n">FRAME 7</span><div class="frame-b">LINK: TAKE THE FIRST READ</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Wednesday</span>
+          <span class="d-title">LET ME SHOW YOU</span>
+          <span class="d-chips"><span class="chip fmt">Product Demo Reel</span><span class="chip cta terra">First Read</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Show the actual flow; build trust through transparency. First Read.</div></div>
+          <div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">Let me show you the part that&#x27;s hard to explain in words.<br><br>[SCREEN]<br><br>This is the First Read.<br><br>You answer one question at a time.<br><br>No:<br><br>“Which hormone imbalance do you think you have?”<br><br>Because... how would you know?<br><br>[SCREEN]<br><br>Instead:<br><br>What is happening with your cycle?<br><br>Your sleep?<br><br>Energy?<br><br>Skin?<br><br>Hair?<br><br>Mood?<br><br>[SCREEN]<br><br>And behind that, the reading is looking at how those answers relate.<br><br>At the end, you get the primary pattern your answers point toward.<br><br>[RESULT PREVIEW]<br><br>And then you decide whether you want the full report.<br><br>That&#x27;s the flow.<br><br>No magic.<br><br>No ten-minute diagnosis.<br><br>Just a much better organised starting point.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">This is what I&#x27;ve been building.<br><br>One reading.<br><br>Your actual answers.<br><br>A clearer starting point.<br><br>Your primary pattern is free.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Take the First Read.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">Screen recording.<br>ON SCREEN: This is where you start.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">Question screen.<br>SAY: One question at a time.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">SAY: This is why it takes 12–15 minutes. We need more than one symptom.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">Result preview.<br>SAY: And this is where the scattered answers become one reading.</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">LINK: TRY YOUR FIRST READ</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Thursday</span>
+          <span class="d-title">FIRST READ VS PATTERN REPORT</span>
+          <span class="d-chips"><span class="chip fmt">Carousel</span><span class="chip fmt ghost">9 SLIDES</span><span class="chip cta terra">First Read</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Clarify free vs €35 honestly so the offer is clean. Start free.</div></div>
+          <div class="sf"><span class="sf-l">SLIDE 01</span><div class="sf-b">FIRST READ<br>vs<br>PATTERN REPORT<br><br>What&#x27;s the difference?</div></div>
+<div class="sf"><span class="sf-l">SLIDE 02</span><div class="sf-b">THE FIRST READ<br><br>One guided reading.<br>12–15 minutes.<br>Your primary pattern is named at the end.<br>Free.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 03</span><div class="sf-b">It also gives you a first look at relevant foundation flags and body-impact information.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 04</span><div class="sf-b">THE PATTERN REPORT<br><br>Uses the same answers.<br>No second assessment.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 05</span><div class="sf-b">It goes deeper:<br><br>Primary pattern explained.<br>Up to two secondary patterns.<br>Foundation flags.<br>Body-impact cards.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 06</span><div class="sf-b">Plus:<br><br>Markers worth discussing with a qualified professional.<br>A printable Clinical Conversation Brief.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 07</span><div class="sf-b">FIRST READ<br>“What pattern do my answers point toward?”<br><br>PATTERN REPORT<br>“Show me the fuller picture and help me prepare the conversation.”</div></div>
+<div class="sf"><span class="sf-l">SLIDE 08</span><div class="sf-b">FIRST READ · FREE<br><br>FULL PATTERN REPORT · €35 FOUNDING PRICE<br><br>One reading. Two depths.</div></div>
+<div class="sf"><span class="sf-l">SLIDE 09</span><div class="sf-b">Start with the free First Read.<br><br>Decide after.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">You don&#x27;t have to pay to find out whether The Body Tell feels useful to you.<br><br>Start with the First Read.<br><br>It takes about 12–15 minutes and names the primary pattern your answers point toward.<br><br>If you want to go deeper, the full Pattern Report uses the same answers.<br><br>No second assessment.<br><br>That&#x27;s where you get the fuller interpretation, up to two secondary patterns where relevant, foundation flags, body-impact information, markers to discuss and the printable Clinical Conversation Brief.<br><br>First Read: free.<br><br>Full Pattern Report: €35 founding price.<br><br>Start with the first one.<br><br>Decide after.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Start free.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">TEXT: IS IT A DIAGNOSIS? No.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: DOES IT REPLACE MY DOCTOR? No.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TEXT: DO I HAVE TO PAY TO SEE MY PRIMARY PATTERN? No. The First Read names it free.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: WHAT IS THE PAID PART? The deeper Pattern Report + Clinical Conversation Brief.</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">QUESTION BOX: What else do you want to know?</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Friday</span>
+          <span class="d-title">PLEASE DON’T BRING YOUR DOCTOR 47 SCREENSHOTS</span>
+          <span class="d-chips"><span class="chip fmt">Reel</span><span class="chip cta terra">See Report</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Sell the Clinical Conversation Brief via humour + utility. See the Pattern Report.</div></div>
+          <div class="fld field"><span class="fld-l">Cover / on-screen hook</span><div class="fld-b">PLEASE DON&#x27;T BRING YOUR DOCTOR 47 SCREENSHOTS.</div></div>
+<div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">I say this with love.<br><br>Please don&#x27;t walk into your next appointment with forty-seven screenshots from TikTok and Google.<br><br>[SMILE]<br><br>Your doctor does not need your entire internet search history.<br><br>What is more useful?<br><br>What changed.<br><br>When it changed.<br><br>What tends to happen together.<br><br>What has already been checked.<br><br>What you want to understand next.<br><br>That&#x27;s why the Pattern Report includes a Clinical Conversation Brief.<br><br>It is not:<br><br>“Hello doctor, the internet diagnosed me.”<br><br>It is:<br><br>“This is what I reported.<br><br>This is the pattern that came through.<br><br>These are the points I&#x27;d like to discuss.”<br><br>Very different energy.<br><br>[BEAT]<br><br>You still need the clinician.<br><br>You just don&#x27;t need to start the story from zero.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">Your next appointment should not require a twenty-minute reconstruction of the previous year.<br><br>And your doctor probably doesn&#x27;t need every screenshot you&#x27;ve saved at 2am.<br><br>Bring the timeline.<br><br>Bring what changed.<br><br>Bring what tends to happen together.<br><br>Bring what has already been checked.<br><br>Bring the questions you still have.<br><br>That is what the Clinical Conversation Brief is for.<br><br>Not to tell your clinician what you have.<br><br>To make your story easier to read.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">See what&#x27;s inside the Pattern Report.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">SHOW BRIEF · SAY: This may actually be my favourite part.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">SAY: Because this is the part designed to leave your phone and come into the appointment with you.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">ON SCREEN: WHAT YOU REPORTED · WHAT DROVE THE READING · WHAT MAY BE WORTH DISCUSSING</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">SAY: You still have the conversation with your clinician. You just don&#x27;t have to reconstruct everything from zero.</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">LINK: SEE THE PATTERN REPORT</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Saturday</span>
+          <span class="d-title">THE SAME INSTINCT. ONE LAYER DOWN.</span>
+          <span class="d-chips"><span class="chip fmt">Static</span><span class="chip cta mute">None</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Tie TBT to the 4.5.6 mission for credibility and moat. Let it land.</div></div>
+          <div class="fld field"><span class="fld-l">Cover / on-screen hook</span><div class="fld-b">4.5.6 ASKED:<br><br>WHY IS ONE KIND OF SKIN THE DEFAULT?<br><br>THE BODY TELL ASKS:<br><br>WHAT GETS MISSED WHEN ONE BODY BECOMES THE DEFAULT?</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">I didn&#x27;t plan for one company to lead to the other.<br><br>4.5.6 began because darker skin had spent too long being treated as an afterthought.<br><br>The Body Tell began with a different experience.<br><br>But I recognised the question.<br><br>Who gets treated as the default?<br><br>What gets noticed?<br><br>What gets missed?<br><br>And does the language we&#x27;re using actually work for the woman standing in front of us?<br><br>Different company.<br><br>Same instinct.<br><br>Look at what the default leaves out.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">None.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">4.5.6 archive.<br>TEXT: 2019–2025</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">TEXT: ONE KIND OF SKIN SHOULD NEVER BE THE DEFAULT SKIN.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">TBT visual.<br>TEXT: Different problem. Familiar question.</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">TEXT: What are we missing because of the way we learned to look?<br>No CTA.</div></div>
+</div>
+        </div>
+      </details>
+      <details class="day">
+        <summary>
+          <span class="d-day">Sunday</span>
+          <span class="d-title">START WITH WHAT YOU KNOW</span>
+          <span class="d-chips"><span class="chip fmt">Reel</span><span class="chip cta terra">First Read</span></span>
+        </summary>
+        <div class="d-body">
+          <div class="obj"><span class="obj-l">Objective</span><div class="obj-b">Remove the &#x27;I don&#x27;t know what&#x27;s wrong&#x27; barrier. Final First Read push.</div></div>
+          <div class="fld script"><span class="fld-l">Full script</span><div class="fld-b">If you know something feels different but you don&#x27;t know what&#x27;s wrong...<br><br>good.<br><br>I mean that.<br><br>Because you don&#x27;t need to know what&#x27;s wrong to start.<br><br>Start with what you actually know.<br><br>My sleep changed.<br><br>My period changed.<br><br>I&#x27;m crashing every afternoon.<br><br>My hair is different.<br><br>My skin changed.<br><br>This started around March.<br><br>These three things seem to happen together.<br><br>That is information.<br><br>[BEAT]<br><br>You do not have to turn yourself into a doctor before you&#x27;re allowed to ask a better question.<br><br>Start with the record.<br><br>Let the conversation go from there.</div></div>
+<div class="fld film"><span class="fld-l">How to film / on-screen</span><div class="fld-b">End frame: YOUR BODY KEEPS A RECORD. LEARN TO READ IT. START YOUR FIRST READ.</div></div>
+<div class="fld field"><span class="fld-l">Caption</span><div class="fld-b">You don&#x27;t need a theory.<br><br>You don&#x27;t need to know which hormone is doing what.<br><br>And you definitely don&#x27;t need to diagnose yourself before you begin.<br><br>Start with what changed.<br><br>The First Read is open.</div></div>
+<div class="fld field"><span class="fld-l">Call to action</span><div class="fld-b">Start Your First Read.</div></div>
+          <div class="stories"><span class="fld-l">Stories (same day)</span>
+<div class="frame"><span class="frame-n">FRAME 1</span><div class="frame-b">SELFIE: This has been a strange month because I&#x27;ve basically taken you through the last two years of my life.</div></div>
+<div class="frame"><span class="frame-n">FRAME 2</span><div class="frame-b">SELFIE: And now I want The Body Tell to stop being only my story and start becoming useful in yours.</div></div>
+<div class="frame"><span class="frame-n">FRAME 3</span><div class="frame-b">POLL: Have you taken your First Read?<br>YES / NOT YET</div></div>
+<div class="frame"><span class="frame-n">FRAME 4</span><div class="frame-b">YES PATH · SAY: Tell me what surprised you. I genuinely want to know.<br>QUESTION BOX: What did you recognise?</div></div>
+<div class="frame"><span class="frame-n">FRAME 5</span><div class="frame-b">NOT YET PATH · SAY: You don&#x27;t need to know what&#x27;s wrong. That&#x27;s not the entry requirement.</div></div>
+<div class="frame"><span class="frame-n">FRAME 6</span><div class="frame-b">LINK: START WITH WHAT YOU KNOW · TAKE YOUR FIRST READ</div></div>
+</div>
+        </div>
+      </details></div>
+    </section>
+
+    <section id="filming" class="tabpane">
+      <h2 class="wk-h">Filming &amp; orchestration</h2>
+      <div class="cols">
+        <div class="panel">
+          <h3>Batch-film in one or two sessions</h3>
+          <ul class="ticks">
+            <li><b>4 founder films</b> (Mon of each week) — talking-head, full scripts in each week tab. Film back-to-back; same setup, same wardrobe logic so the series feels one piece.</li>
+            <li><b>Founder cut-downs &amp; talking-head reels</b> — film in the same session as the founder films; they reuse the same lines.</li>
+            <li><b>Product demo (W4 Wed) + brief reveal (W4 Fri)</b> — screen-record the real First Read + the Clinical Conversation Brief. No re-enactment.</li>
+            <li><b>Stories</b> — selfie frames can be shot day-of; text/poll frames are built in the app.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Design, don't film</h3>
+          <ul class="ticks">
+            <li>All <b>carousels</b> and <b>statics</b> are design pieces — slide copy is final in each day card. Keep the gold/forest/bone system; mono labels; no emoji.</li>
+            <li><b>Archive / b-roll:</b> real 4.5.6 material only — lab, formulas, community, press, awards, retail, team. Never a sad montage; always return to face.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel accent">
+        <h3>Weekly success signals</h3>
+        <ul class="ticks">
+          <li><b>Week 1</b> — comment volume (practitioner counts, "what I explained away"), Part-1 watch-through, saves on Tue/Thu.</li>
+          <li><b>Week 2</b> — saves (utility), shares (phototype Saturday), comment counts.</li>
+          <li><b>Week 3</b> — saves (clusters), shares (phototype), comments (perimenopause question).</li>
+          <li><b>Week 4</b> — <b>First Reads started &amp; completed</b> (primary), Pattern Report views, <b>email cohort adds</b>, "SYMPTOMS" comments.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Final content QA (from the master)</h3>
+        <p class="qa">✓ 28 feed pieces: 7 per week × 4 weeks.<br>✓ 28 Story sequences: 7 per week × 4 weeks.<br>✓ 4 full founder-film scripts.<br>✓ Every carousel includes every slide.<br>✓ Every Reel includes the actual spoken script.<br>✓ Every feed asset includes a caption.<br>✓ Every feed asset includes a CTA, including when the correct CTA is none.<br>✓ Every Story sequence is frame-by-frame.<br>✓ No product sale in Week 1.<br>✓ Product education begins softly in Week 2.<br>✓ Week 3 establishes why pattern/context matter without turning pattern recognition into diagnosis.<br>✓ Week 4 carries the reveal and conversion.<br>✓ Commercial architecture used here: First Read names the primary pattern free; the deeper Pattern Report is the paid layer and includes the Clinical Conversation Brief.<br>EDITORIAL RULE<br>This document is the single editorial source. Future changes should be applied here rather than compared against older Launch Center versions.</p>
+      </div>
+    </section>
+</main>
+<button class="themebtn" id="theme">◐ theme</button>
+<script>
+const tabs=[...document.querySelectorAll('.tab')],panes=[...document.querySelectorAll('.tabpane')];
+tabs.forEach(t=>t.addEventListener('click',()=>{
+ tabs.forEach(x=>x.classList.remove('active'));t.classList.add('active');
+ const id=t.dataset.t;panes.forEach(p=>p.classList.toggle('active',p.id===id));
+ window.scrollTo({top:0,behavior:'instant'});
+}));
+const root=document.documentElement,btn=document.getElementById('theme');
+btn&&btn.addEventListener('click',()=>{
+ const cur=root.getAttribute('data-theme')|| (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+ root.setAttribute('data-theme',cur==='dark'?'light':'dark');
+});
+</script>
+</body></html>
