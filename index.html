@@ -72,6 +72,22 @@ details[open] summary::after{content:"\2013"}
 .stories{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
 .frame{margin:8px 0;padding-left:14px;border-left:2px solid var(--gold)}
 .frame-b{margin-top:2px;font-size:.9rem;color:var(--ink2)}
+.verdict{background:var(--forest);color:#F3EEDF;border-radius:14px;padding:24px 26px;margin:18px 0}
+.verdict .ey2{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#E7C87E;font-weight:600}
+.verdict h3{font-family:var(--serif);font-weight:600;font-size:1.6rem;margin:6px 0 8px;color:#FBF7EF}
+.verdict p{color:#DCD2BE;margin:0;max-width:64ch}.verdict em{color:#F7E6C4;font-style:italic}
+.metricbox{display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;background:var(--bone2);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:20px 24px;margin:16px 0}
+.metricbox .n{font-family:var(--serif);font-size:3rem;font-weight:600;color:var(--gold-ink);line-height:1}
+.metricbox .d{font-size:.95rem;color:var(--ink2);max-width:60ch}.metricbox .d b{color:var(--ink)}
+ol.gate{list-style:none;counter-reset:g;margin:12px 0;padding:0}
+ol.gate li{counter-increment:g;position:relative;padding:12px 14px 12px 52px;background:var(--bone2);border:1px solid var(--line);border-radius:10px;margin:7px 0;color:var(--ink2)}
+ol.gate li::before{content:counter(g);position:absolute;left:12px;top:11px;width:26px;height:26px;border-radius:50%;background:var(--forest);color:#F3EEDF;font-family:var(--serif);font-weight:600;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+ol.gate b{color:var(--ink)}
+.week{border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:8px 0;background:var(--bone2)}
+.week h4{font-family:var(--serif);font-weight:600;font-size:1.2rem;margin:2px 0 3px}
+.week .role{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink);font-weight:600}
+.week p{margin:0;font-size:.92rem;color:var(--ink2)}
+.callout{border-left:4px solid var(--terra);background:color-mix(in srgb,var(--terra) 9%,transparent);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;color:var(--ink2)}.callout b{color:var(--terra)}
 .themebtn{position:fixed;right:14px;bottom:14px;z-index:30;border:1px solid var(--line);background:var(--bone2);color:var(--ink);font-family:var(--mono);font-size:11px;padding:8px 12px;border-radius:30px;cursor:pointer}
 @media print{.nav,.themebtn{display:none}.tabpane{display:block!important}details.day{break-inside:avoid}details.day>.d-body{display:block!important}summary::after{display:none}body{background:#fff}}
 </style></head><body>
@@ -80,7 +96,7 @@ details[open] summary::after{content:"\2013"}
   <h1>4-Week Full Campaign Master</h1>
   <div class="sub">28 feed pieces · daily Stories · 4 founder films · objectives · scripts · carousels · captions · CTAs · orchestration</div>
 </div></header>
-<nav class="nav"><div class="shell"><button class="tab active" data-t="overview">Overview</button><button class="tab" data-t="w1">W1 · Recognition</button><button class="tab" data-t="w2">W2 · Fragmentation</button><button class="tab" data-t="w3">W3 · Pattern</button><button class="tab" data-t="w4">W4 · Reveal</button><button class="tab" data-t="filming">Filming &amp; Orchestration</button></div></nav>
+<nav class="nav"><div class="shell"><button class="tab active" data-t="overview">Overview</button><button class="tab" data-t="strategy">Strategy</button><button class="tab" data-t="w1">W1 · Recognition</button><button class="tab" data-t="w2">W2 · Fragmentation</button><button class="tab" data-t="w3">W3 · Pattern</button><button class="tab" data-t="w4">W4 · Reveal</button><button class="tab" data-t="filming">Filming &amp; Orchestration</button></div></nav>
 <main>
 
     <section id="overview" class="tabpane active">
@@ -106,6 +122,63 @@ details[open] summary::after{content:"\2013"}
           <li><b>No sale in Week 1.</b> Product education starts softly in Week 2. Conversion is Week 4.</li>
         </ul>
       </div>
+    </section>
+
+    <section id="strategy" class="tabpane">
+      <h2 class="wk-h">Launch strategy</h2>
+      <p class="lede">The content is strong and ready. This is the part the calendar doesn't cover — getting it seen, and turning the people it moves into a cohort you own.</p>
+
+      <div class="verdict"><div class="ey2">The verdict</div>
+        <h3>This is a founding-cohort launch, not a scale launch.</h3>
+        <p>With 1,400 quiet followers, a zero-follower product account and &euro;200, you can't manufacture mass reach in four weeks &mdash; and shouldn't try. "First 100 reads free" is the honest, correct goal: land 100 <em>real</em>, cohort-coherent users with outcome stories. That is the moat. Reach is a means to it, never the scoreboard.</p></div>
+
+      <div class="metricbox"><div class="n">~100</div><div class="d"><b>completed First Reads into the cohort</b> over 4 weeks, most consenting to the Founding Circle (email + phototype + market tag). Reach, saves, comments, watch-through are <b>diagnostic</b>, not the goal. When two metrics conflict, completions win.</div></div>
+
+      <div class="panel accent"><h3>The uncomfortable truth</h3>
+        <p><b>Your founding 100 come from your email list, not your cold social.</b> A ~2,900 warm payer base, emailed well, converts at 3&ndash;5% to a completed free First Read &mdash; that's <b>85&ndash;145 on its own.</b> A zero-to-1,400 cold account delivers a few dozen at best.</p>
+        <ul class="ticks">
+          <li><b>Email is the engine of the 100.</b> If the Brevo base is under the validation-hold, clearing it is <b>task zero</b> &mdash; before a single post.</li>
+          <li><b>Social's job is different:</b> tell the founder story where it travels (grow the audience that funds <em>cohort 2+</em>) and create shareable, press-grade moments. Judge social on audience growth + story reach, not First Reads.</li>
+        </ul></div>
+
+      <h3 style="font-family:var(--serif);font-size:1.4rem;margin:26px 0 6px">The reach engine (what the calendar is missing)</h3>
+      <div class="gridwrap"><table class="grid strat-table"><thead><tr><th>Channel</th><th>Role</th><th>Why</th></tr></thead><tbody>
+        <tr><td><b>Email (Brevo)</b></td><td><b>Primary &mdash; delivers the 100</b></td><td>Warmest, largest owned audience. Algorithm-free. Clear the hold first.</td></tr>
+        <tr><td><b>LinkedIn</b></td><td><b>Primary reach engine</b> for the films</td><td>A vulnerable founder build-in-public story is LinkedIn's best format now; you have the network + 4.5.6 credibility. Films post here first.</td></tr>
+        <tr><td><b>Personal IG (1,400)</b></td><td><b>Home base</b></td><td>A confessional series belongs on a person's account. Warm, not cold. Don't split energy across two accounts.</td></tr>
+        <tr><td><b>TBT IG (0)</b></td><td><b>Echo</b>, not origin</td><td>Re-shares product pieces + hosts the link. Never cold-start your best content on a zero account.</td></tr>
+        <tr><td><b>Borrowed (podcasts / newsletters / collabs)</b></td><td><b>Biggest untapped lever</b></td><td>Absent from the plan. Your story is pitchable. Line up 2&ndash;3 placements in Week 0.</td></tr>
+        <tr><td><b>Paid (&euro;200)</b></td><td><b>Retargeting only</b></td><td>Too small for cold reach. Boost the best film + retarget video-viewers. A second look, not a megaphone.</td></tr>
+      </tbody></table></div>
+
+      <h3 style="font-family:var(--serif);font-size:1.4rem;margin:26px 0 6px">Week 0 funnel gate &mdash; pass all four or don't launch</h3>
+      <ol class="gate">
+        <li><b>Bio link is live</b> and points straight at the First Read, on the launch account.</li>
+        <li><b>Comment &rarr; DM automation</b> exists for "Comment SYMPTOMS" &mdash; not you manually DMing 100 people.</li>
+        <li><b>Completion captures the moat:</b> finishing writes the email to Brevo, asks Founding-Circle consent, tags cohort &mdash; GDPR-defensibly.</li>
+        <li><b>"First 100 free" is a real coded entitlement</b> (FOUNDING code), gated server-side with a live count &mdash; not a slogan onto a &euro;35 wall.</li>
+      </ol>
+      <div class="callout"><b>If any of the four is vapour, that is the real Week-0 work &mdash; not more content.</b> The calendar is done; the funnel is what's unproven.</div>
+
+      <h3 style="font-family:var(--serif);font-size:1.4rem;margin:26px 0 6px">The 4 weeks, by where reach comes from</h3>
+      <div class="week"><span class="role">Week 0 &middot; Prime</span><h4>Wire + warm</h4><p>Clear the Brevo hold. Pass the funnel gate. Batch-film all 4 films + reels. Tease the list. Line up 2&ndash;3 borrowed placements.</p></div>
+      <div class="week"><span class="role">Week 1 &middot; Recognition</span><h4>Attention, no pitch</h4><p>Part 1 &rarr; LinkedIn first, then personal IG. Email the story. Goal: comments + watch-through. Capture stays passive (bio link only).</p></div>
+      <div class="week"><span class="role">Week 2 &middot; Fragmentation</span><h4>Soft capture begins</h4><p>Part 2. "Free First Read in bio" + Story stickers. Email: Part 2 + soft mention. Borrowed placements land.</p></div>
+      <div class="week"><span class="role">Week 3 &middot; Pattern</span><h4>Ramp + paid on</h4><p>Part 3. Full bio + sticker capture; consent on completion. Email: "the First Read is free." Turn on the &euro;200.</p></div>
+      <div class="week"><span class="role">Week 4 &middot; Reveal</span><h4>Convert the 100</h4><p>Part 4 + first-100-free + "Comment SYMPTOMS &rarr; DM." Hard email push. Retargeting hits every video-viewer.</p></div>
+
+      <div class="cols" style="margin-top:22px">
+        <div class="panel"><h3>After week 4 &mdash; don't cliff</h3><p>Collect the outcome story from every one of the 100 &mdash; <em>"did this help you get taken seriously?"</em> &mdash; and turn those into the proof that recruits cohort 2. Drop to 2&ndash;3 posts/week. The founder story keeps earning reach for months; reuse it.</p></div>
+        <div class="panel accent"><h3>Honest risks</h3><ul class="ticks">
+          <li><b>Email / consent (GDPR):</b> the #1 operational risk. Clear the hold properly, lead with consent, honour the re-optin.</li>
+          <li><b>Cadence vs. burnout:</b> batch in Week 0. If something gives, cut Stories first; protect the films, utility carousels, and email.</li>
+          <li><b>Story loves &ne; product takes:</b> watch the film-view-to-First-Read ratio; fix friction fast.</li>
+        </ul></div>
+      </div>
+
+      <div class="verdict" style="margin-top:22px"><div class="ey2">In one line</div>
+        <h3>Win the founding 100 from your warm email list; use the founder story on LinkedIn to build the audience that funds cohort 2.</h3>
+        <p>The content is ready. Clear the email hold, pass the funnel gate, and point everything at completed, consented First Reads. Scale comes later &mdash; the moat starts now.</p></div>
     </section>
 <section id="w1" class="tabpane"><h2 class="wk-h">WEEK 1 · RECOGNITION</h2><p class="lede">By Sunday: “Something changed. I am allowed to notice.”</p><div class="gridwrap"><table class="grid"><thead><tr><th>Day</th><th>Format</th><th>Piece</th><th>Objective</th><th>CTA</th></tr></thead><tbody><tr><td class="g-day">Monday</td><td><span class="chip fmt">Founder film</span></td><td class="g-title">FOUNDER FILM PART 1 · LOSING THE COMPANY / LOSING THE IDENTITY</td><td class="g-obj">Anchor the week&#x27;s emotional argument.</td><td><span class="chip cta forest">Comment</span></td></tr><tr><td class="g-day">Tuesday</td><td><span class="chip fmt">Carousel · 8 slides</span></td><td class="g-title">THREE TESTS FOR “I&#x27;M PROBABLY JUST TIRED”</td><td class="g-obj">Interrupt automatic symptom-normalisation.</td><td><span class="chip cta gold">Save · Comment</span></td></tr><tr><td class="g-day">Wednesday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">WHEN DID THIS BECOME NORMAL?</td><td class="g-obj">Expose the creeping-baseline problem before fragmentation week.</td><td><span class="chip cta forest">Comment</span></td></tr><tr><td class="g-day">Thursday</td><td><span class="chip fmt">Utility carousel · 9 slides</span></td><td class="g-title">BRING THE WHOLE PICTURE</td><td class="g-obj">Give immediate appointment-prep utility.</td><td><span class="chip cta gold">Save</span></td></tr><tr><td class="g-day">Friday</td><td><span class="chip fmt">Founder cutdown Reel</span></td><td class="g-title">I REALLY THOUGHT WE&#x27;D MADE IT</td><td class="g-obj">Drive viewers back to Founder Film Part 1.</td><td><span class="chip cta gold">Watch</span></td></tr><tr><td class="g-day">Saturday</td><td><span class="chip fmt">Static editorial</span></td><td class="g-title">YOU DON&#x27;T NEED TO PROVE YOU&#x27;RE SICK TO NOTICE YOU&#x27;VE CHANGED</td><td class="g-obj">Give permission to notice change without self-diagnosing.</td><td><span class="chip cta mute">None</span></td></tr><tr><td class="g-day">Sunday</td><td><span class="chip fmt">Reel</span></td><td class="g-title">BUT MAYBE IT&#x27;S JUST STRESS?</td><td class="g-obj">Close Week 1 on the danger of stopping at a plausible explanation.</td><td><span class="chip cta mute">None</span></td></tr></tbody></table></div><div class="daycards">
       <details class="day">
