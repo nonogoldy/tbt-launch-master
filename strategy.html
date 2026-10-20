@@ -1,0 +1,141 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Body Tell · Launch Strategy</title>
+<style>
+:root{
+ --bone:#F4EEE1;--bone2:#FBF8F1;--ink:#211C15;--ink2:#51463A;--mute:#877A69;
+ --forest:#1F3A2C;--gold:#C48820;--gold-ink:#8A5E12;--terra:#B7593E;--good:#2F5D43;--line:#E2D7C3;
+ --serif:'Cormorant Garamond',Georgia,'Palatino Linotype',Palatino,serif;
+ --sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+ --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;}
+@media (prefers-color-scheme:dark){:root{
+ --bone:#14100A;--bone2:#1C1710;--ink:#EFE8DA;--ink2:#BDB09C;--mute:#8A7D6B;
+ --forest:#2C5340;--gold:#D99E3A;--gold-ink:#D99E3A;--terra:#D27A64;--good:#6FA383;--line:#30271A;}}
+:root[data-theme="light"]{--bone:#F4EEE1;--bone2:#FBF8F1;--ink:#211C15;--ink2:#51463A;--line:#E2D7C3;--gold-ink:#8A5E12;}
+:root[data-theme="dark"]{--bone:#14100A;--bone2:#1C1710;--ink:#EFE8DA;--ink2:#BDB09C;--line:#30271A;--gold-ink:#D99E3A;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+.top{background:var(--forest);color:#F3EEDF;padding:30px 22px}
+.shell{max-width:860px;margin:0 auto}
+.brand{font-family:var(--mono);letter-spacing:.16em;font-size:11px;font-weight:600;color:#E7C87E}
+.top h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,6vw,52px);line-height:1.03;margin:10px 0 8px;letter-spacing:-.01em}
+.top p{color:#DCD2BE;max-width:60ch;margin:0;font-size:1.05rem}
+main{max-width:860px;margin:0 auto;padding:40px 22px 100px}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3.6vw,30px);letter-spacing:-.01em;margin:46px 0 6px}
+.ey{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-ink);font-weight:600}
+p{color:var(--ink2);max-width:68ch}
+b,strong{color:var(--ink)}
+.verdict{background:var(--forest);color:#F3EEDF;border-radius:14px;padding:26px 28px;margin:26px 0}
+.verdict .ey{color:#E7C87E}.verdict h3{font-family:var(--serif);font-weight:600;font-size:1.7rem;margin:6px 0 8px;color:#FBF7EF}
+.verdict p{color:#DCD2BE;max-width:64ch}
+.metric{display:flex;gap:22px;align-items:baseline;flex-wrap:wrap;background:var(--bone2);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:22px 26px;margin:20px 0}
+.metric .n{font-family:var(--serif);font-size:3.4rem;font-weight:600;color:var(--gold-ink);line-height:1}
+.metric .d{font-size:.98rem}
+.callout{border-left:4px solid var(--terra);background:color-mix(in srgb,var(--terra) 9%,transparent);border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}
+.callout b{color:var(--terra)}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.92rem;background:var(--bone2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-ink);text-align:left;padding:12px 14px;border-bottom:2px solid var(--line)}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+tr:last-child td{border-bottom:0}td b{color:var(--ink)}
+.wrapx{overflow-x:auto}
+ol.gate{list-style:none;counter-reset:g;margin:18px 0;padding:0}
+ol.gate li{counter-increment:g;position:relative;padding:14px 16px 14px 56px;background:var(--bone2);border:1px solid var(--line);border-radius:10px;margin:8px 0}
+ol.gate li::before{content:counter(g);position:absolute;left:14px;top:13px;width:28px;height:28px;border-radius:50%;background:var(--forest);color:#F3EEDF;font-family:var(--serif);font-weight:600;display:flex;align-items:center;justify-content:center}
+ol.gate b{color:var(--ink)}
+ul.clean{list-style:none;padding:0;margin:14px 0}
+ul.clean li{position:relative;padding-left:20px;margin:9px 0;color:var(--ink2)}
+ul.clean li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.week{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:10px 0;background:var(--bone2)}
+.week h4{font-family:var(--serif);font-weight:600;font-size:1.25rem;margin:0 0 4px}
+.week .role{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink)}
+.kick{font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--forest);max-width:30ch;margin:8px 0 0}
+.themebtn{position:fixed;right:14px;bottom:14px;border:1px solid var(--line);background:var(--bone2);color:var(--ink);font-family:var(--mono);font-size:11px;padding:8px 12px;border-radius:30px;cursor:pointer}
+.foot{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--mute)}
+</style></head><body>
+<header class="top"><div class="shell">
+  <div class="brand">THE BODY TELL · LAUNCH STRATEGY</div>
+  <h1>Win the founding 100.</h1>
+  <p>A strategist's read on the 4-week campaign. The content is strong and ready. This page is about the thing the content calendar doesn't cover — getting it seen, and turning the people it moves into a cohort you own.</p>
+</div></header>
+<main>
+
+  <div class="verdict">
+    <div class="ey">The verdict</div>
+    <h3>This is a founding-cohort launch, not a scale launch.</h3>
+    <p>With 1,400 quiet followers, a zero-follower product account and €200, you cannot manufacture mass reach in four weeks — and you shouldn't try. Your own "first 100 reads free" is the honest, correct goal. Land 100 <em>real</em>, cohort-coherent users with outcome stories. That is the moat. Reach is a means to it, never the scoreboard.</p>
+  </div>
+
+  <div class="ey">The one metric</div>
+  <div class="metric"><div class="n">~100</div><div class="d"><b>completed First Reads into the cohort</b> over 4 weeks, with a high share consenting to the Founding Circle (email + phototype + market tag). Everything else — reach, saves, comments, watch-through — is <b>diagnostic</b>, not the goal. When two metrics conflict, completions win.</div></div>
+
+  <h2><span class="ey">The uncomfortable truth</span><br>Your founding 100 will come from your email list — not your cold social.</h2>
+  <p>Run the math. A warm payer base of ~2,900, emailed well, converts at even 3–5% to a completed free First Read — that's <b>85–145 completions on its own.</b> A zero-to-1,400 cold social account, over four weeks, realistically delivers a few dozen at best. So the division of labour is clear and it is <b>not</b> what the calendar implies:</p>
+  <ul class="clean">
+    <li><b>Email is the engine of the founding 100.</b> If the Brevo base is still under the validation-hold, clearing it is <b>task zero</b> — before a single post. Without it, this launch runs on fumes.</li>
+    <li><b>Social's job is different:</b> (a) tell the founder story where it travels, to grow the audience that funds <em>cohort 2+</em>, and (b) create shareable, press-grade moments that earn borrowed reach. Judge social on audience growth + story reach, not on First Reads.</li>
+  </ul>
+
+  <h2><span class="ey">Distribution</span><br>The reach engine (what the calendar is missing)</h2>
+  <p>28 posts is a content-supply plan, not a distribution plan. Here is where reach actually comes from, ranked by leverage for <em>your</em> situation:</p>
+  <div class="wrapx"><table>
+    <thead><tr><th>Channel</th><th>Role in this launch</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><b>Email (Brevo)</b></td><td><b>Primary — delivers the 100</b></td><td>Your warmest, largest owned audience. Direct, algorithm-free. Clear the hold first.</td></tr>
+      <tr><td><b>LinkedIn</b></td><td><b>Primary reach engine</b> for the founder films</td><td>A vulnerable, well-told founder build-in-public story is LinkedIn's best-performing format right now, and you have a real founder network + 4.5.6 credibility. Films post here <em>first</em>, native.</td></tr>
+      <tr><td><b>Personal IG (1,400)</b></td><td><b>Home base</b> — run the launch here</td><td>A confessional series belongs on a person's account, not a brand's. Warm, not cold. Don't split energy across two accounts.</td></tr>
+      <tr><td><b>TBT / product IG (0)</b></td><td><b>Echo</b>, not origin</td><td>Re-shares product pieces + hosts the First Read link. Never try to cold-start your best content on a zero account.</td></tr>
+      <tr><td><b>Borrowed (podcasts / newsletters / creator collabs)</b></td><td><b>The biggest untapped lever</b></td><td>Absent from the plan. Your story is pitchable. Line up 2–3 placements in Week 0 to land Weeks 2–3.</td></tr>
+      <tr><td><b>Paid (€200)</b></td><td><b>Retargeting only</b></td><td>Too small for cold reach. Boost the one best film + retarget video-viewers with the First Read. A second look, not a megaphone.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2><span class="ey">Week 0 · before you post anything</span><br>The funnel gate — pass all four or don't launch</h2>
+  <p>When reach is scarce, you cannot leak one interested person. Walk one real human through the whole path yourself and confirm each step fires:</p>
+  <ol class="gate">
+    <li><b>Bio link is live</b> and points straight at the First Read, on the account you're launching from.</li>
+    <li><b>Comment → DM automation</b> exists for "Comment SYMPTOMS" (ManyChat/IG) — not you manually DMing 100 people, which drops people past ~20.</li>
+    <li><b>Completion captures the moat:</b> finishing the First Read writes the email to Brevo, <em>asks Founding-Circle consent</em>, and tags cohort (phototype + market) — cleanly, GDPR-defensibly.</li>
+    <li><b>"First 100 free" is a real coded entitlement</b> (your FOUNDING code), gated server-side with a live count — not a slogan that dumps people onto a €35 wall.</li>
+  </ol>
+  <div class="callout"><b>If any of the four is vapour, that is the real Week-0 work — not more content.</b> The calendar is done. The funnel is what's unproven, and it's where good-content launches quietly die.</div>
+
+  <h2><span class="ey">Sequencing</span><br>The 4 weeks, by where reach comes from</h2>
+  <div class="week"><span class="role">Week 0 · Prime</span><h4>Wire + warm</h4><p>Clear the Brevo hold. Pass the funnel gate. Batch-film all 4 founder films + the reels in one or two sessions. Tease the list ("something I've been quietly building"). Line up 2–3 borrowed placements.</p></div>
+  <div class="week"><span class="role">Week 1 · Recognition</span><h4>Attention, no pitch</h4><p>Founder Part 1 → LinkedIn first, then personal IG. Email the story to the list. Goal: comments + watch-through. Capture stays passive (bio link only). You're earning the right to sell later.</p></div>
+  <div class="week"><span class="role">Week 2 · Fragmentation</span><h4>Soft capture begins</h4><p>Part 2. "Free First Read in bio" + Story link stickers. Email: Part 2 + soft First-Read mention. Borrowed placements land here. "Five symptoms. Five specialists. One body." does the shareable work.</p></div>
+  <div class="week"><span class="role">Week 3 · Pattern</span><h4>Ramp + paid on</h4><p>Part 3. Full bio + sticker capture; Founding-Circle consent on completion. Email: "the First Read is free." Turn on the €200 — boost the best film, retarget viewers.</p></div>
+  <div class="week"><span class="role">Week 4 · Reveal</span><h4>Convert the 100</h4><p>Part 4 + <b>first 100 free</b> + "Comment SYMPTOMS → DM." Hard email push with the free-100 offer. Retargeting hits every video-viewer. This is where completions + consent are won.</p></div>
+
+  <h2><span class="ey">Applied fix</span><br>Corrected founder-film CTA ladder</h2>
+  <p>The films stay non-transactional — they earn attention — but every one now carries a <em>quiet</em> path so the people most moved by the story don't fall through. (Live in the command center.)</p>
+  <ul class="clean">
+    <li><b>Part 1:</b> comment what you lost · no pitch · <em>quiet</em>: free First Read in bio when ready · watch Part 2.</li>
+    <li><b>Part 2:</b> comment your symptoms + how many specialists · free First Read in bio · watch Part 3.</li>
+    <li><b>Part 3:</b> comment what you put on hold · free First Read in bio · watch Part 4.</li>
+    <li><b>Part 4:</b> <b>the first 100 reads are free — start your First Read</b> · Comment SYMPTOMS → DM the link.</li>
+  </ul>
+
+  <h2><span class="ey">After week 4</span><br>Don't cliff — close the loop</h2>
+  <p>The launch isn't the end; it's the first turn of the moat's flywheel. Collect the outcome story from every one of the 100 — <em>"did this help you get taken seriously?"</em> — and turn those into the proof that recruits cohort 2. Drop to a sustainable 2–3 posts/week. The founder story keeps earning reach for months; reuse it.</p>
+
+  <h2><span class="ey">Honest risks</span><br>What could sink this</h2>
+  <ul class="clean">
+    <li><b>Email deliverability / consent.</b> Given the GDPR history, this is the #1 operational risk. Clear the hold properly, lead with consent, honour the re-optin. The engine of the 100 is also the biggest liability.</li>
+    <li><b>Cadence vs. burnout.</b> 28 posts + daily Stories + LinkedIn + email, solo, for four weeks — about burnout. Batch everything in Week 0. If something has to give, cut Stories first; protect the 4 films, the utility carousels, and the email.</li>
+    <li><b>Story loves ≠ product takes.</b> People may adore the story and never tap the link. Mitigated by the quiet bio path on every film, the Week-4 hard offer, and retargeting — but watch the film-view-to-First-Read ratio and fix friction fast.</li>
+  </ul>
+
+  <div class="verdict" style="margin-top:40px">
+    <div class="ey">In one line</div>
+    <h3>Win the founding 100 from your warm email list; use the founder story on LinkedIn to build the audience that funds cohort 2.</h3>
+    <p>The content is ready. Clear the email hold, pass the funnel gate, and point everything at completed, consented First Reads. The scale comes later — the moat starts now.</p>
+  </div>
+
+  <div class="foot">The Body Tell · Launch Strategy · companion to the 4-Week Command Center</div>
+</main>
+<button class="themebtn" id="theme">◐ theme</button>
+<script>
+const root=document.documentElement,btn=document.getElementById('theme');
+btn.addEventListener('click',()=>{const c=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');root.setAttribute('data-theme',c==='dark'?'light':'dark');});
+</script>
+</body></html>
